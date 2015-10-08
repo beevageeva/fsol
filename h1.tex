@@ -1,0 +1,55 @@
+\documentclass[12pt]{book}
+\usepackage{graphicx}
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+\usepackage{tkz-euclide}
+\usepackage{tikz}
+\setlength{\oddsidemargin}{15.5pt} 
+\setlength{\evensidemargin}{15.5pt}
+\pretolerance=2000
+\tolerance=3000
+\renewcommand{\figurename}{Figura}
+\renewcommand{\chaptername}{Cap\'{i}tulo}
+\renewcommand{\contentsname}{\'{I}ndice}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\bibname}{Bibliograf\'{i}a}
+\renewcommand{\appendixname}{Ap\'endices}
+
+
+\title{Sistema autogravitante con simetría esférica y distribución exponencial de masa}
+\date{}
+\begin{document}
+\begin{enumerate}
+\item
+\begin{tikzpicture}[scale=.8]
+
+% definitions
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(3.5,0){Q}
+\tkzDefPoint(4.5,0){Fc}
+\tkzDefPoint(5.5,0){Fp}
+\tkzDefPoint(6.5,0){Fprad}
+
+\draw [->, shorten >= -5cm, shorten <=-5cm] (O)--(Q);
+\draw [-latex, red, thick] (Q) -- (Fc);
+\draw[postaction={decorate,decoration={markings,mark=at position 0.25 with {\arrow[black,line width=1.5pt]{>}}}}](A)node[below]{A}--(B)node[above]{Fc};
+\draw [-latex, red, thick] (Fp) -- (Fprad);
+\node at (10,0.5){r} ; 
+\tkzDrawCircle(O,Q) 
+\tkzDrawPoints(O,Q)
+
+% labels
+\tkzLabelPoints(Q,O)
+\tkzLabelPoints(Fc){$F_c$}
+\tkzLabelPoints(Fp){$F_p$}
+\tkzLabelPoints(Fprad){$F_pRad$}
+%\tkzLabelPoints[right](P)
+\end{tikzpicture}
+
+
+\end{enumerate}
+
+\end{document}
