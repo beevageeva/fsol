@@ -1,4 +1,4 @@
-\documentclass[12pt]{book}
+\documentclass[10pt]{book}
 \usepackage{graphicx}
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 \usepackage[utf8]{inputenc}
@@ -19,37 +19,357 @@
 \renewcommand{\appendixname}{Ap\'endices}
 
 
-\title{Sistema autogravitante con simetría esférica y distribución exponencial de masa}
-\date{}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=15mm,
+ right=10mm,
+ top=20mm,
+ bottom=20mm,
+ }
+
 \begin{document}
-\begin{enumerate}
-\item
+\paragraph 1 
+El sentido de las fuerzas gravitatoria($\vec{F_g}$), centrífuga($\vec{F_c}$), debida al gradiente de presión de radiación($\vec{F_{Prad}}$) y del gas($\vec{F_P}$)que accionan en el punto Q situado al radio r (en coordenadas esféricas, suponiendo simetría esférica):
 \begin{tikzpicture}[scale=.8]
 
 % definitions
 \tkzDefPoint(0,0){O}
 \tkzDefPoint(3.5,0){Q}
+\tkzDefPoint(2.5,0){Fg}
 \tkzDefPoint(4.5,0){Fc}
-\tkzDefPoint(5.5,0){Fp}
-\tkzDefPoint(6.5,0){Fprad}
+\tkzDefPoint(6.0,0){Fprad}
+\tkzDefPoint(7.5,0){Fp}
 
 \draw [->, shorten >= -5cm, shorten <=-5cm] (O)--(Q);
-\draw [-latex, red, thick] (Q) -- (Fc);
-\draw[postaction={decorate,decoration={markings,mark=at position 0.25 with {\arrow[black,line width=1.5pt]{>}}}}](A)node[below]{A}--(B)node[above]{Fc};
-\draw [-latex, red, thick] (Fp) -- (Fprad);
+\draw [->] (Q)--(Fc);
+\draw [->] (Fc)--(Fprad);
+\draw [->] (Fprad)--(Fp);
+\draw [<-] (Fg)--(Q);
 \node at (10,0.5){r} ; 
+\node at (4.5,0.5){$\vec{F_{c}}$} ; 
+\node at (6.0,0.5){$\vec{F_{Prad}}$} ; 
+\node at (7.5,0.5){$\vec{F_{P}}$} ; 
+\node at (2.5,0.5){$\vec{F_{g}}$} ; 
 \tkzDrawCircle(O,Q) 
 \tkzDrawPoints(O,Q)
 
 % labels
 \tkzLabelPoints(Q,O)
-\tkzLabelPoints(Fc){$F_c$}
-\tkzLabelPoints(Fp){$F_p$}
-\tkzLabelPoints(Fprad){$F_pRad$}
-%\tkzLabelPoints[right](P)
 \end{tikzpicture}
 
+Por la simetría esférica las variables $\rho$, P, T, .. no dependen de los ángulos $\theta$ y $\phi$ 
 
-\end{enumerate}
+$\nabla_r f  = \frac{df}{dr} = \frac{\partial f}{\partial r}$
+
+$\nabla_\theta f  = \nabla_\phi f = 0$
+
+(solo la componente en la dirección $\vec{e_r}$ del gradiente es diferente de 0)
+
+Notamos $F_g$, $F_c$, $F_{Prad}$, $F_P$ los módulos de estas fuerzas por unidad de masa (acceleraciones)
+
+La ecuación de equilibrio hidrostático:
+
+$F_g = F_P + F_c + F_{Prad}$
+
+donde 
+
+$F_g = \frac {G M(r)}{r^2}$
+
+
+$F_P = -\frac {1}{\rho}\frac {\partial P}{\partial r}$
+
+
+$F_{Prad} = -\frac {1}{\rho}\frac {\partial Prad}{\partial r}$
+
+$Prad = \frac{4 \sigma T^4}{3 c}$
+
+$\implies$
+
+$F_{Prad} = -\frac {16 \sigma T^3}{3 c \rho}\frac {\partial T}{\partial r}$
+
+
+Los gradientes de temperatura y presión son negativos lo que justifica el signo -
+
+
+$F_c = \frac {v_r^2}{r}$
+
+$v_r = \frac{2 \pi r}{A} $ donde A es el periodo de rotación de 27 días(A = 27 * 24 * 3600 s) $\implies$
+
+$F_c = \frac {4 \pi^2 r}{A^2}$
+
+Si despreciamos $F_c$ y  $F_{Prad}$ la ecuación del equilibrio hidrostático:
+
+$ \frac{d P}{d r} = -\rho \frac{G M(r)}{r^2}$
+
+Usamos las notaciones y valores:
+\begin{description}
+\item $M_S = 1.9891 \cdot 10^{30} kg$ para la masa del sol
+\item $R_S = 0.7 \cdot 10^9 m$ para el radio del sol
+\item $\sigma = 5.67 \cdot 10^{-8} \frac{W}{m^2 K^4}$ para la constante de Stefan-Boltzmann
+\item $G = 6.674 \cdot 10^{-11} \frac{N m^2}{kg^2}$ para la constante de gravitación universal
+\item $c = 3 \cdot 10^{8} \frac{m}{s}$ para la velocidad de la luz
+
+\end{description}
+
+Notamos $q = \frac{r}{R_S}$ y $m_f = \frac{M(r)}{M_S}$ 
+y podemos considerar las variables P, $\rho$, T, $m_f$ de la tabla del modelo estándar como funciones de $q$
+
+Hay que estimar los valores de $F_c$, $F_g$ y $F_{Prad}$ para  $q \in \{0.1, 0.3, 1\}$
+
+$F_c = \frac {4 \pi^2 R_S}{A^2} q$
+ 
+
+$F_g = \frac {G M_S}{R_S^2} \frac{m_f}{q^2} $
+
+$\frac {\partial T}{\partial r} = \frac {\partial T}{\partial q}   \frac {\partial q}{\partial r} =  \frac {1}{R_S}  \frac {\partial T}{\partial q} \implies $
+
+$F_{Prad} = -\frac {16 \sigma}{3 c R_S} \frac {T^3}{\rho} \frac {\partial T}{\partial q}$
+
+En la tabla tenemos n + 1 valores discretos de q: $q_0=0, q_1, .. q_n = 1$
+y de las funciones f(q), con f que quede ser T, $\rho$, $m_f$,.. 
+ 
+Para calcular los valores de estas funciones y de las derivadas $\forall q \in [0,1]$:
+
+\begin{description}
+\item caso1:
+
+$\exists i \in \{0,..n\} | q = q_i$
+
+\begin{description}
+\item $f(q) = f(q_i)$
+\begin{description}
+\item $i<n \implies \frac {\partial f}{\partial q} = \frac {f(q_{i+1}) - f(q_i)}{q_{i+1} - q_i}$
+\item $i=n \implies \frac {\partial f}{\partial q} = \frac {f(q_{n}) - f(q_{n-1})}{q_{n} - q_{n-1}}$
+\end{description}
+\end{description}
+
+\item caso2:
+
+$\exists i \in \{1,..n\} | q \in (q_{i-1},q_i)$
+
+\begin{description}
+
+\item $f(q) = f(q_{i-1}) + \frac{(q  - q_{i-1})(f(q_i) - f(q_{i-1}))}{q_i - q_{i-1}}$
+
+(interpolación lineal)
+
+\item $ \frac {\partial f}{\partial q} = \frac {f(q_{i}) - f(q_{i-1})}{q_{i} - q_{i-1}}$
+\end{description}
+
+\end{description}
+En el caso del problema: $q \in \{0, 0.3, 1\}$ 
+\small
+
+\begin{verbatim}
+
+q=1.0e-01
+mf=7.8184e-02
+rho=8.7594e+04 kg/m3
+T=1.3073e+07 K
+dT/dq=-3.7875e+07 K
+dT/dr=-5.4107e-02 K/m
+Fg=2.1182e+03 m/s2
+Fc=5.0781e-04 m/s2
+Fc/Fg=2.3974e-07
+Fprad=1.3910e+00 m/s2
+Fprad/Fg=6.5670e-04
+
+q=3.0e-01
+mf=6.0629e-01
+rho=1.2288e+04 kg/m3
+T=6.8316e+06 K
+dT/dq=-2.1250e+07 K
+dT/dr=-3.0357e-02 K/m
+Fg=1.8251e+03 m/s2
+Fc=1.5234e-03 m/s2
+Fc/Fg=8.3472e-07
+Fprad=7.9396e-01 m/s2
+Fprad/Fg=4.3503e-04
+
+q=1.0e+00
+mf=1.0000e+00
+rho=2.5120e-04 kg/m3
+T=5.7780e+03 K
+dT/dq=-2.4630e+07 K
+dT/dr=-3.5186e-02 K/m
+Fg=2.7092e+02 m/s2
+Fc=5.0781e-03 m/s2
+Fc/Fg=1.8744e-05
+Fprad=2.7236e-02 m/s2
+Fprad/Fg=1.0053e-04
+
+
+\end{verbatim}
+
+\normalsize
+
+$\frac{F_c}{F_g} \approx \frac{F_Prad}{F_g}  \approx 0$
+
+\paragraph 2
+
+$ \epsilon = 2.54 \cdot 10^4 \rho X^2 T_9^{-\frac{2}{3}} e^{-\frac{3.37}{T_9^\frac{1}{3}}} \frac{erg}{g \cdot s} $
+
+
+S.I.: 
+
+$ 1erg = 10^{-7} J $,
+
+$ 1g = 10^{-3} kg $
+
+
+$ \epsilon = 2.54 \cdot  \rho X^2 T_9^{-\frac{2}{3}} e^{-\frac{3.37}{T_9^\frac{1}{3}}} \frac{J}{kg \cdot s} $
+
+$ E_{nuc} = 2.54 \cdot  \rho X^2 T_9^{-\frac{2}{3}} e^{-\frac{3.37}{T_9^\frac{1}{3}}} \cdot M_S \cdot mf_{nuc}$   W (1W = 1J/s)
+
+Calculamos para el núcleo: $\frac{r}{R_S} \le 2.0130e-01$ y $\frac{r}{R_S} \le 2.3760e-01$ 
+
+\begin{verbatim}
+
+rfNuc= Rnuc/RS = 2.0130e-01
+mfNuc= Mnuc/MS = 3.3880e-01
+T=1.3114e+07 K
+T9=1.3114e-02 K
+rho=9.7816e+04 kg/m3
+X=5.0200e-01
+Enuc = 4.717933e+29 W
+
+
+rfNuc= Rnuc/RS = 2.3760e-01
+mfNuc= Mnuc/MS = 4.4520e-01
+T=1.2579e+07 K
+T9=1.2579e-02 K
+rho=8.9590e+04 kg/m3
+X=5.2333e-01
+Enuc = 5.195219e+29 W
+
+\end{verbatim}
+
+
+\paragraph 3
+
+$ \mu  = \frac{1}{\sum_j \frac{X_j}{\mu_j}} $ donde $X_j$ es la abundancia de cada elemento
+
+$ \mu_j  = \frac{A_j}{N_j} $ donde $N_j$ es el número de partículas / núcleo ($N_j$ = 1 núcleo + núm. electrones libres) y 
+$A_j$ es la masa atómica del elemento($A_j$  = núm protones + num. neutrones del núcleo)
+
+Para los elementos totalmente ionizados(todos los electrones libres) $\mu_j = \frac{A_j}{1+Z_j}$ donde $Z_j$ = núm protones del núcleo(núm atómico) y para los metales $\mu_j \approx 2$
+
+Hay que considerar para cado estado de ionización un término en la suma con abundancia $p_{j_i} \cdot X_j $ donde $p_{j_i}$ es la proporcion de estos iones de todos los átomos de este elemento ($A_j$ va a ser el mismo, pero $N_j$ va a ser diferente para cada estado de ionización)
+
+Consideramos $A_{met}$ = 17
+
+\begin{description}
+\item H, He estado neutro
+
+$ \mu_H  = \frac{1}{1} = 1$ ($N_H$ = 1 núcleo, $A_H$ = 1)
+
+$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo)
+
+$ \mu = \frac{1}{X + \frac{Y}{4}}$
+ 
+\item H, He totalmente ionizados
+
+$ \mu_{H^+}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1$e^-$ = 2, $A_H$ = 1)
+
+$ \mu_{He^{+2}}  = \frac{4}{3} $ ($N_{He}$ = 1 núcleo + 2 $e^-$ = 3, $A_{He}$ = 4)
+
+$ \mu = \frac{1}{2X + \frac{3Y}{4}}$
+
+\item H, He y metales en estado neutro
+
+$ \mu_H  = \frac{1}{1} = 1$ ($N_H$ = 1 núcleo, $A_H$ = 1)
+
+$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo, $A_{He}$ = 4)
+
+$ \mu_{met}  = \frac{17}{1} = 17$ ($N_{met}$ = 1 núcleo, $A_{met}$ = 17)
+
+$ \mu = \frac{1}{X + \frac{Y}{4} + \frac{Z}{17}}$
+
+\item H, He totalmente ionizados y metales 50\% ionizados
+
+$ \mu_{H^+}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1$e^-$ = 2, $A_H$ = 1)
+
+$ \mu_{He^{+2}}  = \frac{4}{3} $ ($N_{He}$ = 1 núcleo + 2 $e^-$ = 3, $A_{He}$ = 4)
+
+$ \mu_{met}  = \frac{17}{1} = 17 $ ($N_{met}$ = 1 núcleo , $A_{met}$ = 17)
+
+$ \mu_{met^{+Z_{met}}}  \approx 2  $ 
+
+$ \mu = \frac{1}{2 X + \frac{3 Y}{4} + 0.5 \cdot \frac{Z}{17} + 0.5 \cdot \frac{Z}{2} } = \frac{1}{2 X + \frac{3 Y}{4} + \frac{19 Z}{68} }$
+
+\item X = 0.7346, Y = 0.2485, Z = 0.0169
+
+Para el caso H,He y metales en estado neutro  $ \mu = 1.2536e+00 $
+
+Para el caso H,He totalmente ionizados,metales medio ionizados:  $\mu = 0.6023$
+
+$\mu$ está creciendo con el radio porque a radio menor donde la temperatura es mas alta los elementos están mas ionizados y los electrones libres se suman a $N_j$ y $ \mu_j $ es mas pequeño
+
+Mirando en la tabla del modelo estándar intentamos a encontrar valores de $\mu \in [0.611, 1.247]$ (X = 0.735) y los valores de los 2 casos de arriba no cuadran
+
+
+$ \mu_H  = \frac{1}{1} = 1$ ($N_H$ = 1 núcleo, $A_H$ = 1)
+
+$ \mu_{H^{+1}}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1 $e^-$ = 2, $A_H$ = 1)
+
+$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo, $A_{He}$ = 4)
+
+$ \mu_{He^{+1}}  = \frac{4}{2} = 2$ ($N_{He}$ = 1 núcleo + 1 $e^-$ = 2, $A_{He}$ = 4)
+
+$ \mu_{met}  = \frac{17}{1} = 17$ ($N_{met}$ = 1 núcleo, $A_{met}$ = 17)
+
+$ \mu_{met^{+1}}  = \frac{17}{2}$ ($N_{met}$ = 1 núcleo + 1 $e^{-}$ = 2, $A_{met}$ = 17)
+
+Considerando  metales una vez ionizados en proporción p y H y He solo en forma de átomos neutros:
+
+$ \mu = \frac{1}{(X + \frac{Y}{4}  (1-p)\frac{Z}{17} + 2 p \frac{Z}{17}}$
+
+$ X + \frac{Y}{4} +\frac{Z}{17}+  p \frac{Z}{17} = \frac{1}{\mu} $
+
+$ p = \frac{17}{Z} (\frac{1}{\mu} - X - \frac{Y}{4} - \frac{Z}{17}) $
+
+$p(\mu = 1.247) = 4.2303 > 1$ lo que implica que hay que considerar mas estados de ionización
+
+Intentamos encontrar una solución considerando H, He y metales una vez ionizados en la misma proporción p
+
+$ \mu = \frac{1}{(1-p)X + 2p X+ (1-p)\frac{Y}{4} + p \frac{Y}{2}+ (1-p)\frac{Z}{17} + 2 p \frac{Z}{17}}$
+
+$ X + \frac{Y}{4} +\frac{Z}{17}+  p (X + \frac{Y}{4} + \frac{Z}{17}) = \frac{1}{\mu} $
+
+$ p = \frac{\frac{1}{\mu} - X - \frac{Y}{4} - \frac{Z}{17}}{X + \frac{Y}{4} + \frac{Z}{17}} $
+
+$p(\mu = 0.611) = 1.05168 > 1, p(\mu = 1.247) = 5.2719e-03, \mu(p = 1) = 6.2679e-01 $ lo que 
+implica que con un grado pequeño de ionización ($p \ge 2719e-3$) de todos los elementos (solo consideramos una vez ionizados) 
+obtenemeos valores de $\mu$ coherentes con la tabla desde  $\mu = 1.247$  en la superficie  hasta llegar  a $\mu = 0.6267$ y $p=1$, 
+pero si queremos simular valores mas pequeños de $\mu$ (a radio menor, temperatura mayor)
+ (y $\mu \ge 0.611$ por el valor de X) hay que considerar los elementos mas veces ionizados 
+
+
+\item Tenemos de las ecuaciones  de Saha p la proporción de hidrógeno ionizado y  $q_1$, $q_2$ las proporciones de helio ionizado (una vez y 2 veces ionizado)
+
+$ \mu_H  = \frac{1}{1} = 1$ ($N_H$ = 1 núcleo, $A_H$ = 1)
+
+$ \mu_{H^{+1}}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1 $e^-$ = 2, $A_H$ = 1)
+
+$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo, $A_{He}$ = 4)
+
+$ \mu_{He^{+1}}  = \frac{4}{2} = 2$ ($N_{He}$ = 1 núcleo + 1 $e^-$ = 2, $A_{He}$ = 4)
+
+$ \mu_{He^{+2}}  = \frac{4}{3} $ ($N_{He}$ = 1 núcleo + 2 $e^-$ = 3, $A_{He}$ = 4)
+ 
+$ \mu = \frac{1}{(1-p)X + 2pX + (1-q_1-q_2)  \frac{Y}{4} + q_1 \frac{Y}{2} + q_2 \frac{3Y}{4}}$
+
+$ \mu = \frac{1}{X(1 + p) + Y (\frac{1}{4}  + \frac{q_1}{4} + \frac{q_2}{2})}$
+
+\end{description}
+
+
+
+
+
+
+
+
 
 \end{document}

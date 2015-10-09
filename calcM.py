@@ -70,6 +70,22 @@ def getForces(data, v1):
 	Fg = ((G * MS) / RS**2) * (res['fm'] / v1**2)
 	Fprad = (-16.0 * sigma * res['temp'] **3) / (3 * C * res['rho'] * RS) *res['gradT']
 	print("gradTr = %e , Fg = %e, Fc = %e, Fprad = %e" % (res['gradT'] / RS, Fg,Fc,Fprad))
+	print("table format")
+	print("q=%.1e" % v1)
+	print("mf=%.4e" % res['fm'])
+	print("rho=%.4e kg/m3" % res['rho'])
+	print("T=%.4e K" % res['temp'])
+	print("dT/dq=%.4e K" % res['gradT'])
+	print("dT/dr=%.4e K/m" % (res['gradT'] / RS))
+	print("Fg=%.4e m/s2" % Fg)
+	print("Fc=%.4e m/s2" % Fc)
+	print("Fc/Fg=%.4e" % (Fc/Fg))
+	print("Fprad=%.4e m/s2" % Fprad)
+	print("Fprad/Fg=%.4e" % (Fprad / Fg))
+	
+	#print("%.1e\t%.4e\t%.4e\t%.4e\t%.4e\t%.4e\t%.4e\t%.4e\t%.4e" % (v1 ,res['fm'], res['rho'], res['temp'], res['gradT'], res['gradT'] / RS, Fg,Fc,Fprad))
+	#print("%.1e & %.4e & %.4e	&	%.4e	&	%.4e	&	%.4e	&	%.4e	&	%.4e	&	%.4e" % (v1 ,res['fm'], res['rho'], res['temp'], res['gradT'], res['gradT'] / RS, Fg,Fc,Fprad))
+	print("table format end")
 
 def probl1(data):
 	getForces(data,0.1)
@@ -77,31 +93,47 @@ def probl1(data):
 	getForces(data,1)
 
 
-def probl2(data):
-	#FC = 0.21
-	FC = 0.25
+def probl2(data, FC):
 	data = data[data[:,1]<FC]
 	temp = data[:,3].mean()
 	rho = data[:,4].mean()
 	X = data[:,5].mean()
 	temp9 = temp*10**(-9)
-		
-	print(temp)
-	print(temp9)
-	print(rho)
-	print(X)
-
-	ergSi = 2.54 *  rho * X**2 * temp9 ** (-2.0/3) * np.exp(-3.37 / temp9**(1.0/3))
-	
 	n = data.shape[0]
-	mc = data[n-1,0] * MS
+		
+	print("rfNuc= Rnuc/RS = %.4e" %data[n-1,1])
+	print("mfNuc= Mnuc/MS = %.4e" %data[n-1,0])
+	print("T=%.4e K" %temp)
+	print("T9=%.4e K"%temp9)
+	print("rho=%.4e kg/m3"%rho)
+	print("X=%.4e"%X)
 
+	ergSi = 2.54 *  rho *data[n-1,0] * MS* X**2 * temp9 ** (-2.0/3) * np.exp(-3.37 / temp9**(1.0/3))
+	
+	print("Enuc = %e W" % (ergSi))
 
-	print("-----")
-	print("r/RS = %e , energy = %e" % (data[n-1,1], ergSi * mc))
+def calcP(X,Y,Z,mu):
+	return 17.0/Z * (1.0 / mu - X - 0.25 * Y - Z / 17.0)
+
+def calcP2(X,Y,Z,mu):
+	return  (1.0 / mu - X - 0.25 * Y - Z / 17.0)/(X + 0.25 * Y + Z / 17.0)
+
+def calcMu2(X,Y,Z):
+	return  1.0 /(2*X + 0.5 * Y + 2.0 * Z / 17.0)
+
+def probl3(X,Y,Z):
+
+	print("H,He,met estado neutro  %.4e" % (1.0/(X + 0.25 *Y + Z/17.0)))
+	print("H,He t i,met m i  %.4e" % (1.0/(2 * X + 0.75 *Y + 19.0 * Z/68.0)))
+	print("p in  %.4e , %.4e" % (calcP2(X,Y,Z,0.611), calcP2(X,Y,Z,1.247)))
+	print("Mu   %.4e " % (calcMu2(X,Y,Z)))
+	
 
 data = readVals(MODEL_FILENAME)
 #print data[:,0]
-probl1(data)
-#probl2(data)
+#probl1(data)
+FC = 0.21
+#FC = 0.25
+#probl2(data, FC)
+probl3(0.7346, 0.2485, 0.0169)
 
