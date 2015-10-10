@@ -92,7 +92,7 @@ $F_{Prad} = -\frac {16 \sigma T^3}{3 c \rho}\frac {\partial T}{\partial r}$
 Los gradientes de temperatura y presión son negativos lo que justifica el signo -
 
 
-$F_c = \frac {v_r^2}{r}$
+$F_c = \frac {v_r^2}{r}$ donde $v_r$ es el módulo de la velocidad de rotación (la dirección es tangente a la esfera en Q)
 
 $v_r = \frac{2 \pi r}{A} $ donde A es el periodo de rotación de 27 días(A = 27 * 24 * 3600 s) $\implies$
 
@@ -204,7 +204,7 @@ Fprad/Fg=1.0053e-04
 
 \normalsize
 
-$\frac{F_c}{F_g} \approx \frac{F_Prad}{F_g}  \approx 0$
+En los 3 casos $\frac{F_c}{F_g} < \frac{F_Prad}{F_g}  \approx 0$
 
 \paragraph 2
 
@@ -255,7 +255,7 @@ $A_j$ es la masa atómica del elemento($A_j$  = núm protones + num. neutrones d
 
 Para los elementos totalmente ionizados(todos los electrones libres) $\mu_j = \frac{A_j}{1+Z_j}$ donde $Z_j$ = núm protones del núcleo(núm atómico) y para los metales $\mu_j \approx 2$
 
-Hay que considerar para cado estado de ionización un término en la suma con abundancia $p_{j_i} \cdot X_j $ donde $p_{j_i}$ es la proporcion de estos iones de todos los átomos de este elemento ($A_j$ va a ser el mismo, pero $N_j$ va a ser diferente para cada estado de ionización)
+Hay que considerar para cado estado de ionización un término en la suma con abundancia $p_{j_i} \cdot X_j $ donde $p_{j_i}$ es la proporción de estos iones de todos los átomos de este elemento ($A_j$ va a ser el mismo, pero $N_j$ va a ser diferente para cada estado de ionización)
 
 Consideramos $A_{met}$ = 17
 
@@ -264,7 +264,7 @@ Consideramos $A_{met}$ = 17
 
 $ \mu_H  = \frac{1}{1} = 1$ ($N_H$ = 1 núcleo, $A_H$ = 1)
 
-$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo)
+$ \mu_{He}  = \frac{4}{1} = 4$ ($N_{He}$ = 1 núcleo, $A_{He}$ = 4)
 
 $ \mu = \frac{1}{X + \frac{Y}{4}}$
  
@@ -286,7 +286,7 @@ $ \mu_{met}  = \frac{17}{1} = 17$ ($N_{met}$ = 1 núcleo, $A_{met}$ = 17)
 
 $ \mu = \frac{1}{X + \frac{Y}{4} + \frac{Z}{17}}$
 
-\item H, He totalmente ionizados y metales 50\% ionizados
+\item H, He totalmente ionizados y una fracción 50\% de metales  totalmente ionizados
 
 $ \mu_{H^+}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1$e^-$ = 2, $A_H$ = 1)
 
@@ -300,9 +300,9 @@ $ \mu = \frac{1}{2 X + \frac{3 Y}{4} + 0.5 \cdot \frac{Z}{17} + 0.5 \cdot \frac{
 
 \item X = 0.7346, Y = 0.2485, Z = 0.0169
 
-Para el caso H,He y metales en estado neutro  $ \mu = 1.2536e+00 $
+Para el caso H,He y metales en estado neutro:  $ \mu = 1.2536$
 
-Para el caso H,He totalmente ionizados,metales medio ionizados:  $\mu = 0.6023$
+Para el caso H,He totalmente ionizados y metales ionizados totalmente 50\%:  $\mu = 0.6023$
 
 $\mu$ está creciendo con el radio porque a radio menor donde la temperatura es mas alta los elementos están mas ionizados y los electrones libres se suman a $N_j$ y $ \mu_j $ es mas pequeño
 
@@ -365,6 +365,8 @@ $ \mu = \frac{1}{X(1 + p) + Y (\frac{1}{4}  + \frac{q_1}{4} + \frac{q_2}{2})}$
 \end{description}
 
 
+ 
+https://github.com/beevageeva/fsol/
 
 
 
