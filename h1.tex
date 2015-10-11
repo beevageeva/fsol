@@ -74,7 +74,7 @@ $F_g = F_P + F_c + F_{Prad}$
 
 donde 
 
-$F_g = \frac {G M(r)}{r^2}$
+$F_g = \frac {G M_r}{r^2}$
 
 
 $F_P = -\frac {1}{\rho}\frac {\partial P}{\partial r}$
@@ -100,7 +100,7 @@ $F_c = \frac {4 \pi^2 r}{A^2}$
 
 Si despreciamos $F_c$ y  $F_{Prad}$ la ecuación del equilibrio hidrostático:
 
-$ \frac{d P}{d r} = -\rho \frac{G M(r)}{r^2}$
+$ \frac{d P}{d r} = -\rho \frac{G M_r}{r^2}$
 
 Usamos las notaciones y valores:
 \begin{description}
@@ -112,7 +112,7 @@ Usamos las notaciones y valores:
 
 \end{description}
 
-Notamos $q = \frac{r}{R_S}$ y $m_f = \frac{M(r)}{M_S}$ 
+Notamos $q = \frac{r}{R_S}$ y $m_f = \frac{M_r}{M_S}$ 
 y podemos considerar las variables P, $\rho$, T, $m_f$ de la tabla del modelo estándar como funciones de $q$
 
 Hay que estimar los valores de $F_c$, $F_g$ y $F_{Prad}$ para  $q \in \{0.1, 0.3, 1\}$
@@ -253,11 +253,23 @@ $ \mu  = \frac{1}{\sum_j \frac{X_j}{\mu_j}} $ donde $X_j$ es la abundancia de ca
 $ \mu_j  = \frac{A_j}{N_j} $ donde $N_j$ es el número de partículas / núcleo ($N_j$ = 1 núcleo + núm. electrones libres) y 
 $A_j$ es la masa atómica del elemento($A_j$  = núm protones + num. neutrones del núcleo)
 
-Para los elementos totalmente ionizados(todos los electrones libres) $\mu_j = \frac{A_j}{1+Z_j}$ donde $Z_j$ = núm protones del núcleo(núm atómico) y para los metales $\mu_j \approx 2$
+Para los elementos completamente ionizados(todos los electrones libres) $\mu_j = \frac{A_j}{1+Z_j}$ donde $Z_j$ = núm protones del núcleo(núm atómico) y en este caso para los metales $\mu_j \approx 2$
 
 Hay que considerar para cado estado de ionización un término en la suma con abundancia $p_{j_i} \cdot X_j $ donde $p_{j_i}$ es la proporción de estos iones de todos los átomos de este elemento ($A_j$ va a ser el mismo, pero $N_j$ va a ser diferente para cada estado de ionización)
 
 Consideramos $A_{met}$ = 17
+
+Considerando n elementos con números atómicos: $Z_1, .. Z_n$ de las ecuaciones de Saha tenemos:
+
+$p_{j_i} = f(N_e, T, \rho) \forall j\in \{1,..n\}, \forall i\in \{1,..Z_j\}$
+
+donde $N_e$ es el número total de electrones: 
+
+$N_e = \sum_{j=1}^{n} \sum_{i=1}^{Z_j} p_{j_i} \cdot i $ 
+
+De este sistema de ecuaciones podemos determinar $p_{j_i}$
+
+El grado de ionización de un elemento es la proporción de todos los iones de un elemento de los átomos del elemento: $\eta_j = \sum_{i=1}^{Z_j}p_{j_i}$
 
 \begin{description}
 \item H, He estado neutro
@@ -286,7 +298,7 @@ $ \mu_{met}  = \frac{17}{1} = 17$ ($N_{met}$ = 1 núcleo, $A_{met}$ = 17)
 
 $ \mu = \frac{1}{X + \frac{Y}{4} + \frac{Z}{17}}$
 
-\item H, He totalmente ionizados y una fracción 50\% de metales  totalmente ionizados
+\item H, He totalmente ionizados y una fracción 50\% de metales  totalmente ionizados(si 50\% representaba el grado de ionización se hizo la suposición que solo se encontraban en el estado de ionización con todos los electrones libres sin tener en cuenta otros estados)
 
 $ \mu_{H^+}  = \frac{1}{2} $ ($N_H$ = 1 núcleo + 1$e^-$ = 2, $A_H$ = 1)
 
@@ -300,9 +312,12 @@ $ \mu = \frac{1}{2 X + \frac{3 Y}{4} + 0.5 \cdot \frac{Z}{17} + 0.5 \cdot \frac{
 
 \item X = 0.7346, Y = 0.2485, Z = 0.0169
 
-Para el caso H,He y metales en estado neutro:  $ \mu = 1.2536$
+Para los casos de arriba:
 
-Para el caso H,He totalmente ionizados y metales ionizados totalmente 50\%:  $\mu = 0.6023$
+\begin{description}
+\item H,He y metales en estado neutro:  $ \mu = 1.2536$
+\item H,He totalmente ionizados y metales ionizados totalmente 50\%:  $\mu = 0.6023$
+\end{description}
 
 $\mu$ está creciendo con el radio porque a radio menor donde la temperatura es mas alta los elementos están mas ionizados y los electrones libres se suman a $N_j$ y $ \mu_j $ es mas pequeño
 
@@ -340,10 +355,13 @@ $ X + \frac{Y}{4} +\frac{Z}{17}+  p (X + \frac{Y}{4} + \frac{Z}{17}) = \frac{1}{
 $ p = \frac{\frac{1}{\mu} - X - \frac{Y}{4} - \frac{Z}{17}}{X + \frac{Y}{4} + \frac{Z}{17}} $
 
 $p(\mu = 0.611) = 1.05168 > 1, p(\mu = 1.247) = 5.2719e-03, \mu(p = 1) = 6.2679e-01 $ lo que 
-implica que con un grado pequeño de ionización ($p \ge 2719e-3$) de todos los elementos (solo consideramos una vez ionizados) 
-obtenemeos valores de $\mu$ coherentes con la tabla desde  $\mu = 1.247$  en la superficie  hasta llegar  a $\mu = 0.6267$ y $p=1$, 
-pero si queremos simular valores mas pequeños de $\mu$ (a radio menor, temperatura mayor)
- (y $\mu \ge 0.611$ por el valor de X) hay que considerar los elementos mas veces ionizados 
+implica que con un grado pequeño de ionización ($p \ge 5.2719e-3$) de todos los elementos (solo consideramos una vez ionizados) 
+obtenemeos valores de $\mu$ coherentes con la tabla con  $\mu = 1.247$  en la superficie  hasta llegar  a $\mu = 0.6267$ y $p=1$, 
+pero si queremos tener valores mas pequeños de $\mu$ (a radio menor, hasta $\mu = 0.611$)
+hay que considerar los elementos mas veces ionizados.
+
+En realidad habría que considerar el caso general con $p_{j_i}$ nenulos y distinctos para obtener valores coherentes con las ecuaciones de Saha 
+ 
 
 
 \item Tenemos de las ecuaciones  de Saha p la proporción de hidrógeno ionizado y  $q_1$, $q_2$ las proporciones de helio ionizado (una vez y 2 veces ionizado)
