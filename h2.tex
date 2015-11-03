@@ -222,14 +222,19 @@ $I(\mu) = I_1 (\frac{2}{5} + \frac{3 \mu}{5}) $
 \end{figure}
 
 
-Para encontrar la intensidad media sobre el disco hay que integrar $I_{\nu} cos \theta$ sobre $dA = \pi r sin \theta r d\theta$ 
+Para encontrar la intensidad media sobre el disco 
+
+hacemos la suposición que los rayos son paralelos a la línea de visión (hacía el observador) y que hacen el mismo ángulo $\theta$ 
+como si estuvieran en el plano determinado por $\vec{e_z}$ y la línea de visión(independiente de $\phi$)
+
+y luego integramos $I_{\nu} cos \theta$ sobre $dA = \pi r sin \theta r d\theta$ 
 ($I_{\nu}$ solo depende de $\theta$ con $\theta \in$ [-$\frac{\pi}{2}$, $\frac{\pi}{2}$] y
 no depende de $\phi \in$ [-$\pi$, $\pi$]) y dividir por el area total (del disco)  
 
 $I_m = 2 \int_{0}^{\frac{\pi}{2}} {r d\theta \pi r sin \theta I_{\nu}(\theta) cos \theta d\theta} \frac{1}{\pi r^2}$
 
-(se puso el factor 2 enfrente y la integral entre 0 y $\frac{\pi}{2}$ porque el cos es negativo entre -$\frac{\pi}{2}$ y 0 que corresponde
- a la parte de abajo del disco con la misma distribución de intensidad que la parte de arriba)
+(se puso el factor 2 enfrente y la integral entre 0 y $\frac{\pi}{2}$ porque $sin(\theta)$ es negativo entre -$\frac{\pi}{2}$ y 0 que corresponde
+a la parte de abajo del disco que tiene la misma distribución de intensidad que la parte de arriba)
 
 Notando $\mu = cos \theta$
 
@@ -258,7 +263,7 @@ Comprobación:
  \centering
  \includegraphics[scale=0.4]{ld.png}
  \caption{\emph{Intensidad al centro arriba (con rojo) - generada de forma más o menos aleatoria - la intensidad media - abajo (con verde)
-que es el gráfico de arriba escalado con 4/5 - los gradientes también se escalan!}}
+que es el gráfico de arriba escalado con 4/5 - los gradientes también se escalan}}
 \end{figure}
 
 \end{enumerate}
@@ -292,7 +297,7 @@ $I_{\nu} = \frac{dE_{\nu}}{cos \theta dt d\nu d\omega dA} $
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.4]{sph.png}
- \caption{\emph{Geometría esférica}}
+ \caption{\emph{El angulo solido $d\omega$ subtendido por el área dA  \url{http://www.ifa.hawaii.edu/users/kud/teaching_09/3_Radiative_transfer.pdf}}}
 \end{figure}
 
 
@@ -300,7 +305,7 @@ El flujo radiativo es la energía de radiación  con frecuencia entre $\nu$ y $\
 
 Imaginando el centro de la esféra un punto P situado a radio R en la estrella , con la normal en la dirección $\vec{e_z}$
 
-para determinar el flujo radiativo hay que tener en cuenta  las contribuciones de la intensidad en una esféra de radio r centrada en este punto  
+para determinar el flujo radiativo hay que tener en cuenta  las contribuciones de la intensidad en la esféra de radio r   
 
 (hay que integrar $I_{\nu} cos \theta $ sobre el ángulo sólido $d\omega $ para $\theta \in$ [0, $\pi$] y $\phi \in $[0, 2$\pi$])
 
@@ -311,20 +316,19 @@ $\frac{d\omega}{4\pi} = \frac{dA}{4 \pi r^2}  \implies d\omega = sin \theta d\th
 
 $F_{\nu} = \int{I_{\nu}cos \theta d\omega} = \int_0^{2 \pi}{\int_{0}^{\pi}{I_{\nu} cos \theta sin \theta d\theta } d\phi }$
 
-Suponiendo $I_{\nu}$ tiene  simetría azimuthal (no depende del ángulo $\phi$):
+Suponiendo $I_{\nu}$ tiene  simetría acimutal (no depende del ángulo $\phi$):
 
 $F_{\nu} = 2 \pi \int_0^{\pi}{I_{\nu}cos \theta sin \theta d\theta } $
 
-Notamos $cos \theta = \mu$
+Cambio de variable $cos \theta = \mu$
 
 $F_{\nu} = 2 \pi \int_{-1}^{1}{I_{\nu} \mu d\mu } $
 
 Notamos 
 
-$F_{\nu}^{+} = 2 \pi \int_{0}^{1}{I_{\nu} \mu d\mu } $  (el flujo hacía afuera, $\theta \in$ [0, $\frac{\pi}{2}$], 
-la contribución de la intensidad  en el semiespacio caracterizado por el plano tangente en el punto P a la esféra y $z \ge 0$ ) 
+$F_{\nu}^{+} = 2 \pi \int_{0}^{1}{I_{\nu} \mu d\mu } $  (el flujo hacía afuera, $\theta \in$ [0, $\frac{\pi}{2}$]) 
 
-$F_{\nu}^{-} = 2 \pi \int_{-1}^{0}{I_{\nu} \mu d\mu } $  (el flujo hacía adentro)
+$F_{\nu}^{-} = 2 \pi \int_{-1}^{0}{I_{\nu} \mu d\mu } $  (el flujo hacía adentro, $\theta \in$ [$-\frac{\pi}{2}$, 0])
 
 El flujo total:
 
@@ -338,10 +342,10 @@ $F_{\nu} = 0$
 
 Notamos el flujo radiativo  en la superficie de la estrella:
 
-$F_{\nu}^{rad} = F_{\nu}^{+}(R_{*}) $ (en la superficie no hay flujo hacía adentro!)
+$F_{\nu}^{rad} = F_{\nu}^{+}(R_{*}) $ (en la superficie no hay flujo hacía adentro)
 
 
-En el caso del cuerpo negro \textbf{la función de Planck}:
+En el caso del cuerpo negro la intensidad es  \textbf{la función de Planck}:
 
 $I_{\lambda} = B_{\lambda}(T) = \frac{2 h c^2}{\lambda ^5} \frac{1}{exp(\frac{h c}{\lambda k T}) -1 }$  
 
@@ -353,7 +357,7 @@ Cambio de variable $u = \frac{h \nu}{k T} \implies \nu = \frac{k T}{h} u$ y $ d\
 
 $F_{rad}(T) = \pi \frac{2 h}{c^2} (\frac{k T}{h})^4  \int_{0}^{\infty} \frac{u^3}{e^u - 1 }du $
 
-$\int_{0}^{\infty} \frac{u^3}{e^u - 1 }du = \frac{\pi^4}{15} $
+$\int_{0}^{\infty} \frac{u^3}{e^u - 1 }du = \frac{\pi^4}{15} $ (de mathematica)
 
 y notando $\sigma = \frac{2 \pi^5 k^4}{15 c^2 h^3}$
 
@@ -367,8 +371,8 @@ $\frac{\Delta \lambda_D} {\lambda_0}= \frac{\Delta \nu_D} {\nu_0} = \frac{v}{c} 
 
 $\Delta \lambda_D = \frac{\lambda_0}{c} \sqrt{\frac{k_B T}{m} + v_{mic}^2} $
 
-Teniendo en cuenta FeI son líneas de absorción y se  forman a menos altura (15648A  a 20 km y T $\approx$  6000K y 6302A a 170 km y T $\approx$  
-5000K) a la diferencia de la línea de $H\alpha$ de emisión que se forma 
+Teniendo en cuenta que las líneas de FeI  se  forman a menos altura (15648A  a 20 km y T $\approx$  6000K y 6302A a 170 km y T $\approx$  
+5000K) a la diferencia de la línea de $H\alpha$  que se forma 
 en la parte mas alta y más caliente ($\approx$ 15000K) de la atmósfera, $v_{mic} \approx 1000m/s$
 y $m = m_u A$ donde $m_u$ es la masa de un protón y A es la masa atómica (1 para H y 56 para Fe)
 se  calcula el desplazamiento Doppler (para cada velocidad por separado para ver el efecto de cada una: térmica, microturbulencia y total)
@@ -386,8 +390,6 @@ dlTerm = 1.8099e-02 A, dlMic = 2.1007e-02 A, dlTot = 2.7729e-02 A
 Line: FeI , Lambda (A): 15648.0, T = 6000.0(K), A = 56, m=9.2990e-26 kg
 vterm=9.4384e+02 m/s, vtot = 1.3751e+03 m/s
 dlTerm = 4.9231e-02 A, dlMic = 5.2160e-02 A, dlTot = 7.1724e-02 A
-
-
 \end{verbatim}
 
 Para las lineas de hierro el efecto Doppler debido a la microturbulencia es parecido al efecto Doppler
