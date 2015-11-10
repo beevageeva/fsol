@@ -1,0 +1,108 @@
+\documentclass[10pt]{book}
+\usepackage{graphicx}
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+\usepackage{tkz-euclide}
+\usepackage{tikz}
+\setlength{\oddsidemargin}{15.5pt} 
+\setlength{\evensidemargin}{15.5pt}
+\pretolerance=2000
+\tolerance=3000
+\renewcommand{\figurename}{Figura}
+\renewcommand{\chaptername}{Cap\'{i}tulo}
+\renewcommand{\contentsname}{\'{I}ndice}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\bibname}{Bibliograf\'{i}a}
+\renewcommand{\appendixname}{Ap\'endices}
+
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=15mm,
+ right=10mm,
+ top=20mm,
+ bottom=20mm,
+ }
+
+\begin{document}
+\paragraph 2
+
+Notacion para la configuración de los electrones de un átomo:
+\begin{description}
+\item $^{2S+1}L_{J}$, pero en lugar del valor de L se usan letras:
+\item $S \equiv L =0 $
+\item $P \equiv L =1 $
+\item $D \equiv L =2 $
+\item $F \equiv L =3 $
+\item donde los números cuanticos: S representa  el spin, 
+L el momento angular orbital y J el momento angular total (spin + orbital) considerando todos los electrones del átomo
+\item el valor del factor Landé para cada nivel de la transición:
+
+$g = 1 + \frac{J(J+1) + S(S+1) - L(L+1)}{2J(J+1)}$ si $J \neq 0$ y $g=0$ si $J=0$
+
+\item el valor del factor Landé efectivo de la transición:
+
+$\bar{g} = \frac{1}{2}(g_1 + g_2) + \frac{1}{4}(g_1 - g_2)(J_1(J_1+1) - J_2(J_2 + 1))$
+
+donde los valores $_1$ son del nivel antes de la transición y los valores $_2$ después
+
+
+\end{description}
+
+\begin{enumerate}
+\item $5D_2 - 7D_3$
+
+$5D_2 \implies S_1 = 2, L_1 = 2, J_1 = 2 \implies g_1 = 1 + \frac{6+6-6}{12} = \frac{3}{2}$
+
+$7D_3 \implies S_2 = 3, L_2 = 2, J_2 = 3 \implies g_2 = 1 + \frac{12+12-6}{24} = \frac{7}{4}$
+
+$\bar{g} = 2$
+
+\item $5D_0 - 7D_1$
+
+$5D_0 \implies S_1 = 2, L_1 = 2, J_1 = 0 \implies g_1 = 0$
+
+$7D_1 \implies S_2 = 3, L_2 = 2, J_2 = 1 \implies g_2 = 1 + \frac{2+12-6}{4} = 3$
+
+$\bar{g} = 3$
+
+\item $5F_1 - 5D_0$
+
+$5F_1 \implies S_1 = 2, L_1 = 3, J_1 = 1 \implies g_1 = 1 + \frac{2+6-12}{4} = 0$
+
+$5D_0 \implies S_2 = 2, L_2 = 2, J_2 = 0 \implies g_2 = 0$
+
+$\bar{g} = 0$
+
+\item $5P_2 - 5D_2$
+
+$5P_2 \implies S_1 = 2, L_1 = 1, J_1 = 2 \implies g_1 =  \frac{11}{6}$
+
+$5D_2 \implies S_2 = 2, L_2 = 2, J_2 = 2 \implies g_2 = \frac{3}{2}$
+
+$\bar{g} = \frac{5}{3}$
+
+\item $5P_1 - 5D_0$
+
+$5P_1 \implies S_1 = 2, L_1 = 1, J_1 = 1 \implies g_1 = \frac{5}{2}$
+
+$5D_0 \implies S_2 = 2, L_2 = 2, J_2 = 0 \implies g_2 = 0$
+
+$\bar{g} = \frac{5}{2}$
+
+\end{enumerate}
+
+ 
+https://github.com/beevageeva/fsol/
+
+
+
+
+
+
+
+\end{document}
