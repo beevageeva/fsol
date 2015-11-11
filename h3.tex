@@ -29,11 +29,51 @@
  }
 
 \begin{document}
+\paragraph 1
+$
+\begin{pmatrix}
+I\\Q\\U\\V
+\end{pmatrix}
+= 
+\alpha
+\begin{pmatrix}
+I_{m}\\Q_{m}\\U_{m}\\V_{m}
+\end{pmatrix}
++ (1-\alpha)
+\begin{pmatrix}
+I_{nm}\\Q_{nm}\\U_{nm}\\V_{nm}
+\end{pmatrix}
+$
+
+$Q_{nm}=U_{nm}=V_{nm} = 0$ (no polarizada?)
+
+$\implies
+\begin{pmatrix}
+I\\Q\\U\\V
+\end{pmatrix}
+= 
+\begin{pmatrix}
+\alpha I_{m} + (1-\alpha) I_{nm}\\\alpha Q_{m}\\\alpha U_{m}\\\alpha V_{m}
+\end{pmatrix}
+$
+
+Para la parte magnética en el campo débil: (del pdf escaneado)
+
+$V_m = -\Delta\lambda_B cos\theta \frac{dI_m}{d\lambda}$
+
+$I_m = I_{nm} \implies I = I_{m}$
+
+$V = \alpha V_m$
+
+$\implies V = -\alpha \Delta\lambda_B cos\theta \frac{dI}{d\lambda}$
+
+
 \paragraph 2
 
 Notacion para la configuración de los electrones de un átomo:
 \begin{description}
-\item $^{2S+1}L_{J}$, pero en lugar del valor de L se usan letras:
+\item $^{2S+1}L_{J}$
+\item pero en lugar del valor de L se usan letras:
 \item $S \equiv L =0 $
 \item $P \equiv L =1 $
 \item $D \equiv L =2 $
@@ -54,7 +94,7 @@ donde los valores $_1$ son del nivel antes de la transición y los valores $_2$ 
 \end{description}
 
 \begin{enumerate}
-\item $5D_2 - 7D_3$
+\item $5D_2 - 7D_3$ (Fe I, $\lambda = 5247.1$ A)
 
 $5D_2 \implies S_1 = 2, L_1 = 2, J_1 = 2 \implies g_1 = 1 + \frac{6+6-6}{12} = \frac{3}{2}$
 
@@ -62,7 +102,7 @@ $7D_3 \implies S_2 = 3, L_2 = 2, J_2 = 3 \implies g_2 = 1 + \frac{12+12-6}{24} =
 
 $\bar{g} = 2$
 
-\item $5D_0 - 7D_1$
+\item $5D_0 - 7D_1$ (Fe I, $\lambda = 5250.2$ A)
 
 $5D_0 \implies S_1 = 2, L_1 = 2, J_1 = 0 \implies g_1 = 0$
 
@@ -70,15 +110,15 @@ $7D_1 \implies S_2 = 3, L_2 = 2, J_2 = 1 \implies g_2 = 1 + \frac{2+12-6}{4} = 3
 
 $\bar{g} = 3$
 
-\item $5F_1 - 5D_0$
+\item $5F_1 - 5D_0$ (Fe I, $\lambda = 5576.1$ A)
 
 $5F_1 \implies S_1 = 2, L_1 = 3, J_1 = 1 \implies g_1 = 1 + \frac{2+6-12}{4} = 0$
 
 $5D_0 \implies S_2 = 2, L_2 = 2, J_2 = 0 \implies g_2 = 0$
 
-$\bar{g} = 0$
+$\bar{g} = 0$ (magnetic insensitive line)
 
-\item $5P_2 - 5D_2$
+\item $5P_2 - 5D_2$ (Fe I, $\lambda = 6301.5$ A)
 
 $5P_2 \implies S_1 = 2, L_1 = 1, J_1 = 2 \implies g_1 =  \frac{11}{6}$
 
@@ -86,7 +126,7 @@ $5D_2 \implies S_2 = 2, L_2 = 2, J_2 = 2 \implies g_2 = \frac{3}{2}$
 
 $\bar{g} = \frac{5}{3}$
 
-\item $5P_1 - 5D_0$
+\item $5P_1 - 5D_0$ (Fe I, $\lambda = 6302.5$ A)
 
 $5P_1 \implies S_1 = 2, L_1 = 1, J_1 = 1 \implies g_1 = \frac{5}{2}$
 
@@ -96,7 +136,57 @@ $\bar{g} = \frac{5}{2}$
 
 \end{enumerate}
 
+
+\paragraph 3
+
+$\Delta \lambda_B = k \lambda_0^2 g B $
+
+donde $k = 4.67 \cdot 10^{-13} A^{-1} G^{-1} = 4.67 \cdot 10^{-3} m^{-1} G^{-1}$
+
+y g es el factor Landé efectivo de la transición ($\bar{g}$)
+
+$\Delta \lambda_D = \Delta \lambda_B \iff B = \frac{v}{c k \lambda_0 g} $
+
+
+donde v es la velocidad total (con los componentes de la velocidad térmica y microturbulencia) que aparece en
+la fórmula del ensanchamiento Doppler
+
+\begin{verbatim}
+Line: Halpha , Lambda: 6562.8 A, g = 1.0
+T = 15000.0 K, v = 1.1212e+04 m/s, dlD = 0.2453 A
+B = 200.0 G, dlB = 0.0040 A
+B = 1000.0 G, dlB = 0.0201 A
+B = 3000.0 G, dlB = 0.0603 A
+dlD = dlB <=> B = 12194.6568 G
+
+Line: FeI , Lambda: 6302.5 A, g = 2.5
+T = 5000.0 K, v = 1.3200e+03 m/s, dlD = 0.0277 A
+B = 200.0 G, dlB = 0.0093 A
+B = 1000.0 G, dlB = 0.0464 A
+B = 3000.0 G, dlB = 0.1391 A
+dlD = dlB <=> B = 597.9685 G
+
+Line: FeI , Lambda: 15648.0 A, g = 3.0
+T = 6000.0 K, v = 1.3751e+03 m/s, dlD = 0.0717 A
+B = 200.0 G, dlB = 0.0686 A
+B = 1000.0 G, dlB = 0.3430 A
+B = 3000.0 G, dlB = 1.0291 A
+dlD = dlB <=> B = 209.0781 G
+\end{verbatim}
+
  
+\paragraph 4
+
+$\Delta \lambda_B = k \lambda_0^2 g B $
+
+$\Delta \lambda_D =  \lambda_0 \frac{v}{c} $
+
+$S_m = \frac{\Delta \lambda_B}{\Delta \lambda_D} = C \lambda_0 g$
+
+donde $C = \frac{k B c}{v}$ no depende de $\lambda_0$ o g 
+
+$\implies S_m \propto \lambda_0 g$
+
 https://github.com/beevageeva/fsol/
 
 
