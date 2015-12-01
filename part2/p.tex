@@ -20,49 +20,54 @@
 \usepackage{geometry}
  \geometry{
  a4paper,
- left=15mm,
- right=10mm,
- top=20mm,
- bottom=20mm,
+ left=5mm,
+ right=5mm,
+ top=5mm,
+ bottom=5mm,
  }
 
 \begin{document}
 
-\paragraph 1a) 
+\paragraph {1a)} 
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.5]{tempLayers.png}
  \caption{\emph{Temperature vs z plot. logarithmic y scale}}
 \end{figure}
 
+In order to identify the layers I put conditions on temperature:
 
-Temperature layers (from top to bottom), interval of temperatures measured in K and code conditions  from: 
 \url{http://www.nasa.gov/mission_pages/iris/multimedia/layerzoo.html}
 
+Looking at  the values from the  file 'atmosphere.dat' ordered by height from top(of the atmosphere) 
+to bottom I consider the corona while temperature $\ge 500000$ K (T is decreasing), 
+transition region until T = 8000 K, the chromosphere until T reaches the (only) minimum, afterwards the temperature starts to raise
+and I consider the layer before it reaches 6500 K the photosphere and  the solar interior after
+
+The exact values matching these conditions are: 
 \begin{description}
 
-\item corona between [39.802200, 2.535930] Mm temperatures: [1.080180e+06, 5.025160e+05] K ($\ge 500000$)
-\item transition region between [2.516350, 0.991115] Mm temperatures: [4.991350e+05, 8.067640e+03] K  ($[50000, 8000)$)
-\item chromosphere between [0.971556, 0.305708] Mm temperatures: [7.306160e+03, 2.843670e+03] K ($[8000, min(temperature)]$)
-\item photosphere between [0.286093, -0.303487] Mm temperatures: [2.848470e+03, 6.297540e+03] K ($(min(temperature), 6500]$)
-\item solar interior between [-0.323184, -2.592960] Mm temperatures: [6.837750e+03, 2.068340e+04] K ($ > 6500$)
+\item corona between [39.802200, 2.535930] Mm temperatures: [1.080180e+06, 5.025160e+05] K 
+\item transition region between [2.516350, 0.991115] Mm temperatures: [4.991350e+05, 8.067640e+03] K  
+\item chromosphere between [0.971556, 0.305708] Mm temperatures: [7.306160e+03, 2.843670e+03] K 
+\item photosphere between [0.286093, -0.303487] Mm temperatures: [2.848470e+03, 6.297540e+03] K 
+\item solar interior between [-0.323184, -2.592960] Mm temperatures: [6.837750e+03, 2.068340e+04] K 
 
 \end{description}
 
 
 
-\paragraph 1b)
+\paragraph {1b)}
 
 $\mu = \frac{n_{H} + 4 n_{He}}{n_e + n_H + n_{He}} $
 
+$n_H= 10 n_{He} \implies  \mu = \frac{1.4 n_H}{n_e + 1.1 n_H}$
+
+
 \begin{itemize}
-\item totally ionized H and He $\implies n_e = n_H + 2 n_{He} \implies  \mu = \frac{n_{H} + 4 n_{He}}{2 n_H + 3 n_{He}} $
-
-$n_H= 10 n_{He} \implies  \mu = \frac{14}{23}  = 0.6087$
-
-\item neutral H and He $\implies n_e = 0 \implies  \mu = \frac{n_{H} + 4 n_{He}}{n_H + n_{He}} $
-
-$n_H= 10 n_{He} \implies  \mu = \frac{14}{11}  = 1.2727$
+\item totally ionized H and He $\implies n_e = n_H + 2 n_{He} = 1.2 n_H \implies \frac{n_H}{n_e} = \frac{5}{6} $ and 
+$ \mu = 0.6987 $
+\item neutral H and He $\implies n_e = 0 \implies  \mu = 1.2727 $
 
 \end{itemize}
 
@@ -71,17 +76,18 @@ $n_H= 10 n_{He} \implies  \mu = \frac{14}{11}  = 1.2727$
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.5]{mmmLayers.png}
- \caption{\emph{Mean molecular weight(g/mol) vs z plot} Upper limit close 1.2727 = $\mu$ in the case of neutral H and He, lower limit close to 0.6087 = $\mu$ calculated in the case of completely ionized H and He }
+ \caption{\emph{Mean molecular weight(g/mol) vs z plot} Maximum close to 1.2727 = $\mu$ in the case of neutral H and He and minimum close to 0.6087 = $\mu$ calculated in the case of completely ionized H and He }
 \end{figure}
 
-$n_{He}  = \frac{1}{10} n_H \implies \mu = \frac{n_{H} + \frac{4}{10} n_{H}}{n_e + n_H +\frac{1}{10} n_{H}} $
-  
-$\implies \mu (1 + \frac{11}{10} \frac{n_{H}}{n_e})=  \frac{14}{10} \frac{n_{H}}{n_e}    $
+$\frac{n_H}{n_e} =  \frac{\mu}{1.4 - 1.1 \mu }   $
 
-$\implies \frac{n_H}{n_e} =  \frac{\mu}{1.4 - 1.1 \mu }   $
+In the case of neutral H and He $n_e \rightarrow 0 \implies \frac{n_H}{n_e} \rightarrow \infty $
 
+When plotting  $\frac{n_H}{n_e}$ using $\mu$ from the file, as we can see in the graphic of $\mu$ there are some values of z for which
+$\mu > 1.2727 \implies 1.4 - 1.1 \mu < 0 \implies \frac{n_H}{n_e} < 0$
 
- 
+I will limit oy axis values to $ [0,4]$ 
+
 
 \begin{figure}[!ht]
  \centering
@@ -89,8 +95,11 @@ $\implies \frac{n_H}{n_e} =  \frac{\mu}{1.4 - 1.1 \mu }   $
  \caption{number of atoms of H / number of electrons }
 \end{figure}
 
-In the graphic(data from file) we can see the constant value in the corona of $\frac{n_H}{n_e} = 0.843 \approx = \frac{5}{6}$ 
-which is the value we calculate in the case of totally ionized H and He and we expect this
+We can see a constant value of $\frac{n_H}{n_e}$ in the corona of $\frac{n_H}{n_e} = 0.843 \approx  \frac{5}{6}$ 
+which is the value we calculate in the case of totally ionized H and He and we expect this because of the high values of
+the temperature in the corona
+
+
 
 \begin{figure}[!ht]
  \centering
@@ -99,29 +108,117 @@ which is the value we calculate in the case of totally ionized H and He and we e
 \end{figure}
 
 
+\paragraph{2)}
 
+$\frac{d \text{ln} p}{dz} = -\frac{1}{H_p}$, $H_p$ const $\implies$ ln $p(z)$ - ln $ p(z_0) = -\frac{1}{H_p}(z-z_0) \implies p(z) = p(z_0) exp(-\frac{z-z_0}{H_p})$  
+
+$\rho(z) =  \frac{1}{g H_p}p(z) = \frac{p(z_0)}{g H_p} exp(-\frac{z-z_0}{H_p}) = \rho(z_0) exp(-\frac{z-z_0}{H_p})$ 
+
+Analytic test for $H_p$ constant (with values 1 and $1e10$) with $\rho(z_{max})$ taking values: $1e-10, 1e-5, 1e-2,1, 1e2,1e3, 1e7, 1e10$
+Integrating downward or forward in height makes no difference (using ln p)
+\newpage 
 
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.5]{allanalytic.png}
- \caption{Analytic test}
+ \caption{Analytic test Hp=1}
 \end{figure}
+
+\newpage 
 
 \begin{figure}[!ht]
  \centering
  \includegraphics[scale=0.5]{allanalytic2.png}
- \caption{Analytic test}
+ \caption{Analytic test Hp=1e10}
 \end{figure}
+
+\newpage
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{fromFileLn1.png}
+ \caption{logarithmic (base e: ln) of pres, rho}
+\end{figure}
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{fromFile1.png}
+ \caption{pres, rho}
+\end{figure}
+
+Notation: $\mu_0$ = magnetic permeability 
+
+$\beta = \frac{p}{p_{mag}}$ where $p_{mag} = \frac{B^2}{2 \mu_0}$
+
+$v_A = \frac{B ^2 }{ \mu_0 \rho} $
+
+$c_s = \sqrt{\frac{\gamma p}{ \rho}} $
+
+\newpage
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{fromFileLn2.png}
+ \caption{logarithmic (base e: ln) of beta plasma, vA, cs}
+\end{figure}
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{fromFile2.png}
+ \caption{beta plasma, vA, cs}
+\end{figure}
+
+$\beta = \frac{2 p \mu_0}{B^2} = \frac{2 p}{\rho v_A^2} = \frac{2 }{\gamma}(\frac{c_s}{v_A})^2
+\implies \beta (\frac{v_A}{c_s})^2 \frac{\gamma}{2} = 1 $
+We call this function func($\beta, \frac{v_A}{c_s}$) in the graphic below and expect it to be 1
+
+
+\newpage
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{fromFileLn3.png}
+ \caption{ln func(bp, vA/cs) $\approx$ 0}
+\end{figure}
+
+
+\paragraph{3a)}
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{lambdaPh.png}
+ \caption{ Lambda phot}
+\end{figure}
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{lambdaC.png}
+ \caption{ Lambda corona}
+\end{figure}
+
+Both functions have the maximum for T = 2.238721e+05 K
 
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[scale=0.5]{allfile.png}
- \caption{top pres and density, bottom ln (pres) and ln (density), left outward - inward integration, right inward - outward integration}
+ \includegraphics[scale=0.5]{interpLambdaC.png}
+ \caption{ Lambda corona interpolated for atm. temperatures $> 3 * 10^4$ K in 'atmosphere.dat' plotted vs z}
 \end{figure}
 
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{Lr.png}
+ \caption{ Lr logarithmic y scale}
+\end{figure}
 
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{ue.png}
+ \caption{ Internal energy}
+\end{figure}
 
-
-
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[scale=0.5]{ueDivLr.png}
+ \caption{ Internal energy / Lr}
+\end{figure}
 \end{document}
