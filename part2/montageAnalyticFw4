@@ -1,0 +1,10 @@
+montage \
+ analyticFw_0.png  \
+ analyticFw_1.png  \
+ analyticFw_2.png  \
+ analyticFw_3.png  \
+ analyticFw_4.png  \
+ analyticFw_5.png  \
+ analyticFw_6.png  \
+ analyticFw_7.png  \
+-tile 2x4  -geometry 400x300+1+1  allanalyticFw.png

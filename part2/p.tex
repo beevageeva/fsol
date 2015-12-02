@@ -40,10 +40,10 @@ In order to identify the layers I put conditions on temperature:
 
 \url{http://www.nasa.gov/mission_pages/iris/multimedia/layerzoo.html}
 
-Looking at  the values from the  file 'atmosphere.dat' ordered by height from top(of the atmosphere) 
-to bottom I consider the corona while temperature $\ge 500000$ K (T is decreasing), 
-transition region until T = 8000 K, the chromosphere until T reaches the (only) minimum, afterwards the temperature starts to raise
-and I consider the layer before it reaches 6500 K the photosphere and  the solar interior after
+Algorithm for getting the layers:
+start with values at the top (the values from the  file 'atmosphere.dat' are ordered downwards by height) 
+the corona is while temperature $\ge 500000$ K (T is decreasing), 
+transition region until T = 8000 K, the chromosphere until T reaches the (only) minimum, (afterwards the temperature starts to raise) the photosphere  is before T reaches 6500 K and  the solar interior afetrwards until the end
 
 The exact values matching these conditions are: 
 \begin{description}
@@ -84,7 +84,10 @@ $\frac{n_H}{n_e} =  \frac{\mu}{1.4 - 1.1 \mu }   $
 
 In the case of neutral H and He $n_e \rightarrow 0 \implies \frac{n_H}{n_e} \rightarrow \infty $
 
-When plotting  $\frac{n_H}{n_e}$ using $\mu$ from the file, as we can see in the graphic of $\mu$ there are some values of z for which
+We expect to have big values of this variable in the photosphere
+
+and as we can see in the graphic of $\mu$ there are some values of z for which
+
 $\mu > 1.2727 \implies 1.4 - 1.1 \mu < 0 \implies \frac{n_H}{n_e} < 0$
 
 I will limit oy axis values to $ [0,4]$ in order to avoid these negative values and the big ones 
@@ -93,12 +96,12 @@ I will limit oy axis values to $ [0,4]$ in order to avoid these negative values 
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{nHDivNe.png}
- \caption{number of atoms of H / number of electrons }
+ \caption{nH / ne }
 \end{figure}
 
-We can see a constant value of $\frac{n_H}{n_e}$ in the corona of $\frac{n_H}{n_e} = 0.843 \approx  \frac{5}{6}$ 
-which is the value we calculate in the case of totally ionized H and He and we expect this because of the high values of
-the temperature in the corona
+We can see a constant value  $\frac{n_H}{n_e}  = 0.843 \approx  \frac{5}{6}$ 
+which is the value we calculate in the case of totally ionized H and He (we expect to have totally ionized H and He because of 
+the high values of the temperature in the corona)
 
 
 
@@ -108,13 +111,19 @@ the temperature in the corona
  \caption{Pressure scale height}
 \end{figure}
 
-$H_p > 0 \implies $ pressure is a decreasing function. $H_p$ is the distance in which pressure will decrease by a factor e so a value close to 0 like in the photosphere and chromosphere means that this distance is very small (it will decrease more abruptly)
-
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{hpLayersPart.png}
  \caption{Checking Hp in the photosphere (between approx 90 - 200 km)}
 \end{figure}
+
+Hp has the minimum at the bottom of the chromosphere (is where T has the minimum and $\mu$ the maximum and  $H_p \propto \frac{T}{\mu}$)
+
+$H_p > 0 \implies $ pressure is a decreasing function. $H_p$ is the distance in which pressure will decrease by a factor e 
+so a small value  like in the photosphere and chromosphere means that pressure will decrease fast in this portion
+
+
+
 
 \paragraph{2)}
 
@@ -127,9 +136,7 @@ Integrating downward or forward in height makes no difference (using ln p)
 
 We see that analytic solution matches exactly numerical solution(we plot ln $p(z)$ - ln $ p(z_i)$ vs z) and 
 
-that the graphic is a line (expected) with slope:
- 
-$\frac{ln p(z_f) - ln  p(z_i)}{z_f - z_i} = -\frac{1}{H_p} $
+that the graphic is a line with slope $\frac{ln p(z_f) - ln  p(z_i)}{z_f - z_i} = -\frac{1}{H_p} $
 
 where $z_f$ = $z_{max}$(z at the top of the atmosphere) and $z_i$ = $z_{min}$(z at the bottom of the atmosphere)
 
@@ -137,14 +144,14 @@ where $z_f$ = $z_{max}$(z at the top of the atmosphere) and $z_i$ = $z_{min}$(z 
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{allanalytic.png}
- \caption{Analytic test Hp=1}
+ \caption{Analytic test Hp=1e10}
 \end{figure}
 
 
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{allanalytic2.png}
- \caption{Analytic test Hp=1e10}
+ \caption{Analytic test Hp=1}
 \end{figure}
 
 
@@ -160,12 +167,13 @@ where $z_f$ = $z_{max}$(z at the top of the atmosphere) and $z_i$ = $z_{min}$(z 
  \caption{rho log10 oy scale}
 \end{figure}
 
-Pressure will decrease very abruptly in photosphere and chromosphere because $H_p$ is very small in this portion and pressure has still high values
+Pressure will decrease very fast (a few orders of magnitude in a short distance) in the photosphere and chromosphere($H_p$ is very small in this portion )
 
-In the transition zone and corona  pressure won't decrease fast because $H_p$ has now bigger values and pressure smaller values
+In the transition zone and corona  pressure will decrease slowly because $H_p$ has now bigger values 
 
-But density will decrease fast in the transition zone as well beacuse of the abrupt raise of the temperature and $\frac{p \mu}{\rho T}$ is constant
+Density ($ \rho \propto \frac{p \mu}{T}$) will decrease fast in the transition zone as well because temperature raises very fast in this portion 
 
+\paragraph{2b)}
 Notation: $\mu_0$ = magnetic permeability 
 
 $\beta = \frac{p}{p_{mag}}$ where $p_{mag} = \frac{B^2}{2 \mu_0}$
@@ -188,7 +196,7 @@ Plasma beta is a decreasing function and has value 1 at z = 0.62 Mm (in the chro
  \caption{vA}
 \end{figure}
 
-In the corona  we observe big values of vA  (between approx. 700 - 1500 km /s) 
+In the corona  we observe big values of vA  (between approx. 700 - 1500 km /s) ($vA \propto \rho^{-0.5}$) 
 
 \begin{figure}[H]
  \centering
@@ -220,9 +228,14 @@ We call this function func($\beta, \frac{v_A}{c_s}$) in the graphic below and ex
 
 
 
+
 \paragraph{3a)}
 
-units of $\Lambda$ in c.g.s are $\frac{erg}{cm^3 s}$ 
+$L_r = \Lambda n_e n_H \implies $
+
+in cgs:  $\frac{erg}{cm^3 s} = [\Lambda] \frac{1}{cm^6}$
+
+units of $\Lambda$ in c.g.s are $\frac{erg cm^3}{s}$ 
 
 \begin{figure}[H]
  \centering
@@ -262,7 +275,7 @@ $n_H = 10 n_{He} \implies \rho = 1.4 n_H m_H$
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{ue.png}
- \caption{ Internal energy}
+ \caption{ Internal energy calculated as 1.5 * p}
 \end{figure}
 
 \paragraph{3d)}
@@ -270,11 +283,12 @@ Equation of energy when $\vec{q} = 0, \vec{v} = 0, \vec{j} = 0$:
 
 $ \frac{\partial u_e}{\partial t} = -L_r$
 
-if we consider $L_r$ constant in time:
+if we consider $L_r$ constant in time(in fact $L_r$ will be decreasing in time because of its dependence on $n_e$ and T):
 
-$u_e(t) = u_e(t=0) - L_r t \implies \frac{u_e(t=0)}{L_r}$ is the time needed to convert all internal energy into radiation energy
+$u_e(t) = u_e(t=0) - L_r t \implies \frac{u_e(t=0)}{L_r}$ is the (minimum, if we think that
+$L_r$ will decrease in time) time needed to convert all internal energy into radiation energy
 
-units of $\frac{u_e(t=0)}{L_r}$ are units of time(s)
+units of $\frac{u_e(t=0)}{L_r}$ are units of time: s
 
 \begin{figure}[H]
  \centering
@@ -282,6 +296,47 @@ units of $\frac{u_e(t=0)}{L_r}$ are units of time(s)
  \caption{ Internal energy / Lr}
 \end{figure}
 
-The maximum value of $\frac{u_e(t=0)}{L_r} $ is about 25000 s in the corona, so in about 7 hours it would lose all internal energy (cool to 0 K ?)
+The maximum value of $\frac{u_e(t=0)}{L_r} $ is about 25000 s at the top the corona, it needs more than  7 hours to cool completely
+
+\paragraph{Testing}
+
+Derivate ln p (obtained after integrating -1/Hp calculated with data taken from the file) by the following scheme:
+
+for an array of n elements f[i], i in [0..n-1]
+we calculate
+df[i] = (f[i+1] - f[i-1]) / (dz[i-1] + dz[i]), for i in [1..n-2];
+df[0] = df[1];
+df[n-1] = df[n-2]
+
+using dz[i] = z[i+1] - z[i] for i in [0..n-2]  (z taken from the file, we have both z and ln p reversed)
+
+and for the array  d ln p obtained this way plot -1 / d ln p and compare with Hp
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{fromFilePyTest.png}
+ \caption{-1/d ln p = Hp}
+\end{figure}
+
+
+\paragraph{Resolution}
+
+decrease resolution by taking off points: in one step we keep only points with even index in the array (first index is 0)
+
+increase resolution artificially  by introducing points : in one step we add points in the middle between each 2 consecutive points and calculate
+the functions from the table: $\mu$ and T by lineal or cubic interpolation
+
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{testData48.png}
+ \caption{ln p decreased resolution (4 steps): 48 points with red points plotted on top, original resolution 768 points }
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{testData3069.png}
+ \caption{ln p increased resolution (2 steps, cubic interpolation): 3069 points with red points, original resolution 768 points plotted on top}
+\end{figure}
 
 \end{document}

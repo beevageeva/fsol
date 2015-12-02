@@ -2,13 +2,26 @@ import numpy as np
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-
+"""
+comment / uncomment in  the source code calls to functions
+plotTempLayers()  plot temperature with layers
+plotMMMLayers() plot mu from file 1 with layers
+plotNHDivNeLayers() plot nH / ne with layers
+plotHp() plot Hp with layers
+analyticTest() analytical test of integration
+integrateFile() plot graphics using data from file
+radiative() for task 3
+"""
 R = 8.314 #J / (K * mol)
 kB = 1.381e-23
 mH = 1.674e-27
 #print("kB/mH = %e" % (kB / mH))
 #R = kB / mH
 gSun = 273.6 #m/s**2
+
+"""
+	z, temp, mmm - height, temperature, mu read from file 1 (all reversed:  lower index higher in the atmosphere )
+"""
 z, temp, mmm = np.loadtxt('atmosphere.dat', unpack=True)
 
 
@@ -24,6 +37,9 @@ def plotTemp():
 	plt.show()	
 
 def plotMMM():
+	"""
+		plot mu from file NO  layers
+	"""
 	plt.title("MMM")
 	#plt.title("Temperature")
 	plt.xlabel("z(Mm)")	
@@ -31,7 +47,11 @@ def plotMMM():
 	plt.draw()	
 	plt.show()	
 
+
 def plotMMMLayers():
+	"""
+		plot mu from file with  layers
+	"""
 	#plt.hlines([0.6087, 1.2727], z[z.shape[0]-1], z[0])
 	#plt.yticks(list(plt.yticks()[0]) + [0.6087, 1.2727] )
 	plt.yticks([0.6087, 1, 1.2727] )
@@ -43,8 +63,11 @@ def plotMMMLayers():
 
 
 
-
 def plotOnAxisWithLayers(ax, vals, printVals = False, plotExtraTicks=False, plotLegend = True):
+	"""
+		plot  vals parameter on axis ax  with layers
+	
+	"""
 	ax.plot(z[0:idx[0]], vals[0:idx[0]],'o', markersize=2, mec='none', label='corona')
 	ax.plot(z[idx[0]+1:idx[1]], vals[idx[0]+1:idx[1]],'o', markersize=2, mec='none', label='trans')
 	ax.plot(z[idx[1]+1:idx[2]], vals[idx[1]+1:idx[2]], 'o', markersize=2, mec='none', label='chrom')
@@ -81,6 +104,9 @@ def plotWithLayers(title, vals, printVals = False):
 	plt.show()	
 
 def plotNHDivNeLayers():
+	"""
+		plot nH / Ne from file with layers	
+	"""
 	func = mmm / (1.4 - 1.1 * mmm)
 	plt.ylim(0,4)
 	plt.yticks(list(plt.yticks()[0]) + [func[0]] )
@@ -88,13 +114,21 @@ def plotNHDivNeLayers():
 	plt.savefig("nHDivNe.png")
 
 def plotHp():
+	"""
+		plot Hp calculated from file with layers	
+	"""
 	plt.ylabel("Hp(Km)")
 	#plt.ylim(0,200)
 	#plt.xlim(-0.5, 0.5)
 	plotWithLayers("Pressure scale height", (R / gSun) * temp / mmm  ) #Plot it in Km 1e-3 from mmm cancels the above from m -> km
 	#plt.savefig("hpLayers.png")
 
+
+#get layers of 
 def getLayerIndicesTemp():
+	"""
+		calculates layer bounds (start indices in the arrays) using temp. conditions	
+	"""
 	# desc
 	CORONA_START = 500000
 	TRANS_REG_START = 8000
@@ -135,6 +169,7 @@ def getLayerIndicesTemp():
 
 
 getLayerIndices = getLayerIndicesTemp
+#trying to get layers by assuming almost constant dz in every layer is not working
 #def getLayerIndicesDz():
 #	# desc
 #	CORONA_START = 500000
@@ -160,6 +195,9 @@ getLayerIndices = getLayerIndicesTemp
 
 
 def plotTempLayers():
+	"""
+		plot temp from file with layers	
+	"""
 	plt.title("Temperature (log scale)")
 	plt.xlabel("z(Mm)")	
 	plt.ylabel("T(K)")
@@ -173,6 +211,9 @@ def plotTempLayers():
 
 #zz ordered downwards
 def integrateFunc(zz, valF, func):
+	"""
+		integrate function downwards starting with final value(calculated at zmax) valF of the function(array) func  	
+	"""
 	i = 0
 	p = np.zeros(len(z))
 	p[0] = valF
@@ -181,6 +222,9 @@ def integrateFunc(zz, valF, func):
 		p[i+1] = p[i] -  0.5*(func[i+1] + func[i])*dz
 	return p
 
+	"""
+		integrate function forward starting with initial value(calculated at zmin) valI of the function(array) func  	
+	"""
 def integrateFuncFw(zz, valI, func):
 	#reverse zz ordered downwards
 	zz = zz[::-1]
@@ -194,6 +238,11 @@ def integrateFuncFw(zz, valI, func):
 	return p[::-1]
 
 def analyticTest():
+	"""
+		test integration with analytical solution
+		in order to use forward integration change calcFw to True below in the source code
+		you can also change the value of Hp or values of rhoFinal to test below in the code 	
+	"""
 	#Hp = 1 => p = rho * gSun * Hp => mmm / temp = Hp * R / gSun
 	#pf outside, pi inside
 	calcFw = False
@@ -201,6 +250,7 @@ def analyticTest():
 	zz = z*1e6 #m
 	zi = zz[len(z)-1]
 	zf = zz[0]
+	print("zf - zi = %e m" % (zf - zi))
 	Hp = 1e10
 	#Hp = 1
 	for i, rhof in enumerate([1e-10, 1e-5, 1e-2,1, 1e2,1e3, 1e7, 1e10]):
@@ -223,21 +273,27 @@ def analyticTest():
 		ax1.set_ylabel('ln p/p(zi)')
 		ax1.plot(z, numPres - numPres[z.shape[0]-1], 'r-', label="num")
 		ax1.plot(z, anPres - anPres[z.shape[0]-1] , 'g-', label="an")
+		ax1.grid(True)
 		ax1.legend()
 		ax2.set_ylabel('ln rho/rho(zi)')
 		ax2.plot(z, numRho - numRho[z.shape[0]-1], 'r-', label='num')
 		ax2.plot(z, anRho - anRho[z.shape[0]-1], 'g-', label="an")
 		ax2.legend()
+		ax2.grid(True)
 		plt.draw()	
 		#plt.show()
+		pngfile = "analytic%s" % (("%e" % Hp).replace("+",""))
 		if calcFw:
-			plt.savefig('analyticFw_%d.png' % i)	
-		else:
-			plt.savefig('analytic_%d.png' % i)	
+			pngfile+= 'Fw'	
+		plt.savefig('%s%d.png' % (pngfile, i))	
 
 
 
 def getPresLog(calcFw):
+	"""
+		calculates ln p using p(zmax) = 5.219e-3 (hardcoded) by integrating forward if calcFw param is True and backwards otherwise
+		-1 / Hp with Hp calculated with the data from the file
+	"""
 	pF = np.log(5.219e-3) #Pa
 	func = -(mmm * 1e-3 * gSun)  / (temp * R)
 	if calcFw:
@@ -250,10 +306,39 @@ def getPresLog(calcFw):
 
 
 def integrateFile():
-	calcLog = True
-	#calcLog = False
+	"""
+		plots all the graphics: pres, rho, plasma b, vA,  cs , vA / cs, func(beta p, vA, cs) see def of func in the pdf
+	"""
+	#plotLog = True
+	plotLog = False
 	calcFw = False
+	#calcFw = True
+	pythonTest = True
+	#pythonTest = False
 	pres = getPresLog(calcFw)
+	if pythonTest:
+
+		def derivZ(f, dx):
+			n = len(f)
+			res = np.zeros((n))
+			for i in range(1,n-1):	
+					#centered
+				res[i] = (f[i+1] - f[i-1])/(dx[i-1] + dx[i])
+			res[0] = res[1]
+			res[n-1] = res[n-2]
+			return res
+	
+		#-1/Hp = - (mu * g) / (R * temp)
+		#Hp =  (R * temp) / (mu * g)  
+		#origf = -(mmm*1e-3*gSun )/ (R  * temp)  
+		origHp =  (R  * temp) / (mmm*1e-3*gSun )
+		derivPres = derivZ(pres, np.diff(z*1e6))
+		f, (ax) = plt.subplots(1)
+		ax.plot(z, origHp, 'r-', label='origHp')
+		ax.plot(z, -1/derivPres, 'g-', label='-1/ dlog p')
+		ax.legend()
+		f.savefig("fromFilePyTest.png")
+		
 	rho =  pres + np.log(mmm * 1e-3) - np.log(R) - np.log(temp)
 	B = np.log(1e-3) #measured in T = 10G
 	gamma = np.log(5/3)
@@ -276,7 +361,7 @@ def integrateFile():
 	f7, (ax7) = plt.subplots(1)
 	for ax in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
 		ax.set_xlabel('z(Mm)')
-	if calcLog:
+	if plotLog:
 		fileName = "fromFileLn"
 	#ln pres and ln rho
 		ax1.set_ylabel('ln p')
@@ -303,8 +388,8 @@ def integrateFile():
 		ax3.set_yticks(ax3.get_yticks().tolist() + [betaPl[indexBeta1]])	
 	else:
 		fileName = "fromFile"
-		scaleLog = False
-		#scaleLog = True
+		#scaleLog = False
+		scaleLog = True
 		#pres and rho
 		ax1.set_ylabel('p(Pa)')
 		#ax1.set_ylim(0,20000)
@@ -342,8 +427,9 @@ def integrateFile():
 		ax3xticks.remove(0)
 		ax3.set_xticks(ax3xticks + [z[indexBeta1]])	
 		ax3.set_yticks(ax3.get_yticks().tolist() + [expBetaPl[indexBeta1]])	
-		
-	
+
+	if calcFw:
+		fileName += "Fw"
 	f1.savefig("%s1.png" % fileName)
 	f2.savefig("%s2.png" % fileName)
 	f3.savefig("%s3.png" % fileName)
@@ -360,6 +446,24 @@ def integrateFile():
 
 
 def radiative():
+	"""
+		task 3 radiative loss, comment / uncomment 	in the source code calls to functions:
+
+		plotLambdaPh():
+			plot lambda ph vs log10 T from the second file (dere_et_al)
+		plotLambdaC():
+			plot lambda c vs log10 T from the second file (dere_et_al)
+		getTempMax():
+			get temp where lambda c and lamda ph have a maximum
+		
+		interpolateLambdaC(): interpolates lambda c for values of temp from the first file. it will only  consider the domain where T>3e4
+		comment / uncomment in code calls to functions:
+			plotInterpValues(): plot interpolated values of lambda c
+			plotLrValues() plot Lr values 
+			plotUeValues() plot Ue values
+			plotUeDivLr() plot Ue / Lr values
+
+	"""
 	log10T, lambdaPh, lambdaC = np.loadtxt('dere_etal_table.dat', unpack=True)
 	def plotLambdaPh():
 		plt.xlabel("log10 T (K)")
@@ -388,15 +492,18 @@ def radiative():
 		atmTemp = temp[atmInd]
 		atmZ = z[atmInd]
 		interpLambdaC = np.interp(np.log10(atmTemp),log10T, lambdaC )
+		#TODO do not calculate pres log on all domain
 		atmPres = np.exp((getPresLog(False))[atmInd])
 		atmMu = mmm[atmInd]
 		atmRho = (atmPres * atmMu * 1e-3) / (R * atmTemp)
 		atmNH = atmRho / (1.4 * mH)
-		atmNe = 1.2 * atmNH
-		atmLr = interpLambdaC *  atmNH * atmNe * 1e-13 #transform to s.i. units
+		#atmNe = 1.2 * atmNH
+		atmLr = interpLambdaC * 1.2* atmNH**2 * 1e-13 #transform to s.i. units
+		#we are not using constant mu
 		#nt = nh + ne + nhe = nh + nh + 2 nhe + nhe = 2 nh + 3 nhe = 2.3 nh
-		atmNt = 2.3 * atmNH
-		ue = 1.5 * atmNt * kB * atmTemp			
+		#atmNt = 2.3 * atmNH
+		#ue = 1.5 * atmNt * kB * atmTemp			
+		ue = 1.5 * atmPres	
 
 		def plotInterpValues():
 			plt.xlabel("z (Mm)")
@@ -432,9 +539,9 @@ def radiative():
 			plt.savefig("ueDivLr.png")
 			plt.show()
 		#plotInterpValues()
-		plotLrValues()
+		#plotLrValues()
 		#plotUeValues()
-		#plotUeDivLr()
+		plotUeDivLr()
 		
 	
 	
@@ -443,7 +550,7 @@ def radiative():
 	#getTempMax()
 	interpolateLambdaC()
 	
-
+#we calculate the indices only once
 idx = getLayerIndices()	
 
 #plotTemp()
@@ -453,7 +560,7 @@ idx = getLayerIndices()
 #plotNHDivNeLayers()
 #plotHp()
 #analyticTest()
-integrateFile()
-#radiative()
+#integrateFile()
+radiative()
 
 
