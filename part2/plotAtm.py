@@ -45,7 +45,6 @@ def plotMMMLayers():
 
 
 def plotOnAxisWithLayers(ax, vals, printVals = False, plotExtraTicks=False, plotLegend = True):
-	idx = getLayerIndices()	
 	ax.plot(z[0:idx[0]], vals[0:idx[0]],'o', markersize=2, mec='none', label='corona')
 	ax.plot(z[idx[0]+1:idx[1]], vals[idx[0]+1:idx[1]],'o', markersize=2, mec='none', label='trans')
 	ax.plot(z[idx[1]+1:idx[2]], vals[idx[1]+1:idx[2]], 'o', markersize=2, mec='none', label='chrom')
@@ -70,8 +69,8 @@ def plotOnAxisWithLayers(ax, vals, printVals = False, plotExtraTicks=False, plot
 			ax.vlines([z[idx[0]], z[idx[1]], z[idx[2]], z[idx[3]], z[0], z[z.shape[0] - 1] ], [0], [vals[idx[0]], vals[idx[1]], vals[idx[2]], vals[idx[3]],  vals[0], vals[z.shape[0] - 1]  ], linestyles='dotted', lw=1 )
 			ax.hlines([vals[idx[0]], vals[idx[1]], vals[idx[2]], vals[idx[3]],  vals[0], vals[z.shape[0] - 1] ], [-10], [z[idx[0]], z[idx[1]], z[idx[2]], z[idx[3]], z[0], z[z.shape[0] - 1] ] , linestyles='dotted', lw=1 )
 	if plotLegend:	
-		ax.legend(bbox_to_anchor=(1.125, 1.125))
-		#ax.legend(bbox_to_anchor=(1.125, 0.75))
+		#ax.legend(bbox_to_anchor=(1.125, 1.125))
+		ax.legend(bbox_to_anchor=(1.125, 0.75))
 
 
 def plotWithLayers(title, vals, printVals = False):
@@ -89,8 +88,11 @@ def plotNHDivNeLayers():
 	plt.savefig("nHDivNe.png")
 
 def plotHp():
-	plt.ylabel("Hp(Mm)")
-	plotWithLayers("Pressure scale height", (R / gSun) * temp / mmm * 1e-6 ) #Plot it in Mm
+	plt.ylabel("Hp(Km)")
+	#plt.ylim(0,200)
+	#plt.xlim(-0.5, 0.5)
+	plotWithLayers("Pressure scale height", (R / gSun) * temp / mmm  ) #Plot it in Km 1e-3 from mmm cancels the above from m -> km
+	#plt.savefig("hpLayers.png")
 
 def getLayerIndicesTemp():
 	# desc
@@ -199,8 +201,8 @@ def analyticTest():
 	zz = z*1e6 #m
 	zi = zz[len(z)-1]
 	zf = zz[0]
-	#Hp = 1e10
-	Hp = 1
+	Hp = 1e10
+	#Hp = 1
 	for i, rhof in enumerate([1e-10, 1e-5, 1e-2,1, 1e2,1e3, 1e7, 1e10]):
 		pfE = rhof * gSun * Hp
 		pf = np.log(pfE)
@@ -212,19 +214,19 @@ def analyticTest():
 			numPres = integrateFunc(zz, pf, func)
 		numRho = numPres -  np.log(gSun * Hp)
 		anPres = pf +  (zf-zz) / Hp
-		print("log pres at top: %e, log pres at the bottom: %e" % (numPres[0], numPres[z.shape[0]-1])) 
+		print("log pres at top: %e, log pres at the bottom: %e, d ln p/dz = %e" % (numPres[0], numPres[z.shape[0]-1], (numPres[0] - numPres[z.shape[0]-1]) / (zf - zi))) 
 		print("log an pres at top: %e, log an pres at the bottom: %e" % (anPres[0], anPres[z.shape[0]-1])) 
 		anRho = np.log(rhof) + (zf-zz) / Hp
 		f, (ax1, ax2) = plt.subplots(2, sharex=True)
 		ax1.set_title('Hp=%e, rhoF = %e kg/m3, pF = %e Pa' % (Hp, rhof, pfE), y=1.08)
 		ax1.set_xlabel('z(Mm)')
-		ax1.set_ylabel('ln p(Pa)')
-		ax1.plot(z, numPres, 'r-', label="num")
-		ax1.plot(z, anPres , 'g-', label="an")
+		ax1.set_ylabel('ln p/p(zi)')
+		ax1.plot(z, numPres - numPres[z.shape[0]-1], 'r-', label="num")
+		ax1.plot(z, anPres - anPres[z.shape[0]-1] , 'g-', label="an")
 		ax1.legend()
-		ax2.set_ylabel('ln rho(kg/m**3)')
-		ax2.plot(z, numRho, 'r-', label='num')
-		ax2.plot(z, anRho, 'g-', label="an")
+		ax2.set_ylabel('ln rho/rho(zi)')
+		ax2.plot(z, numRho - numRho[z.shape[0]-1], 'r-', label='num')
+		ax2.plot(z, anRho - anRho[z.shape[0]-1], 'g-', label="an")
 		ax2.legend()
 		plt.draw()	
 		#plt.show()
@@ -245,8 +247,6 @@ def getPresLog(calcFw):
 		pres = integrateFunc(z*1e6, pF, func)
 	return pres
 
-def getRhoLog(pres):
-	return pres + np.log(mmm) - np.log(R) - np.log(temp)
 
 
 def integrateFile():
@@ -254,7 +254,7 @@ def integrateFile():
 	#calcLog = False
 	calcFw = False
 	pres = getPresLog(calcFw)
-	rho = getRhoLog(pres) 
+	rho =  pres + np.log(mmm * 1e-3) - np.log(R) - np.log(temp)
 	B = np.log(1e-3) #measured in T = 10G
 	gamma = np.log(5/3)
 	from math import pi as mathPi
@@ -267,33 +267,40 @@ def integrateFile():
 	difVaCsBp = betaPl + 2 *  difVaCs + gamma - np.log(2) 
 	print("pres at top: %e, pres at the bottom: %e" % (np.exp(pres[0]), np.exp(pres[pres.shape[0]-1]))) 
 	print("rho at top: %e, rho at the bottom: %e" % (np.exp(rho[0]), np.exp(rho[pres.shape[0]-1]))) 
-	#f, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(7, sharex=True)
-	f1, (ax1, ax2) = plt.subplots(2, sharex=True)
-	f2, (ax3, ax4, ax5) = plt.subplots(3, sharex=True)
-	#f3, (ax6, ax7) = plt.subplots(2, sharex=True)
-	f3, (ax7) = plt.subplots(1)
-	ax7.set_xlabel('z(Mm)')
-	ax5.set_xlabel('z(Mm)')
-	ax2.set_xlabel('z(Mm)')
-	ax1.set_title('from file')
+	f1, (ax1) = plt.subplots(1)
+	f2, (ax2) = plt.subplots(1)
+	f3, (ax3) = plt.subplots(1)
+	f4, (ax4) = plt.subplots(1)
+	f5, (ax5) = plt.subplots(1)
+	f6, (ax6) = plt.subplots(1)
+	f7, (ax7) = plt.subplots(1)
+	for ax in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
+		ax.set_xlabel('z(Mm)')
 	if calcLog:
 		fileName = "fromFileLn"
 	#ln pres and ln rho
-		ax1.set_ylabel('ln p(Pa)')
-		ax2.set_ylabel('ln rho(kg/m**3)')
+		ax1.set_ylabel('ln p')
+		ax2.set_ylabel('ln rho')
 		ax3.set_ylabel('ln beta p.')
-		ax4.set_ylabel('ln vA (m/s)')
-		ax5.set_ylabel('ln cs (m/s)')
-		#ax6.set_ylabel('ln vA/cs ')
-		ax7.set_ylabel('ln func(bp,vA/cs) ')
+		ax4.set_ylabel('ln vA ')
+		ax5.set_ylabel('ln cs')
+		ax6.set_ylabel('ln vA - ln cs')
+		ax7.set_ylabel('ln func(bp, cs/vA)')
 		plotOnAxisWithLayers(ax1, pres)
-		plotOnAxisWithLayers(ax2, rho, plotLegend=False)
+		plotOnAxisWithLayers(ax2, rho)
 		plotOnAxisWithLayers(ax3, betaPl)
-		plotOnAxisWithLayers(ax4, vA, plotLegend=False)
-		plotOnAxisWithLayers(ax5, cs, plotLegend = False)
-		#plotOnAxisWithLayers(ax6, difVaCs)
-		#plotOnAxisWithLayers(ax7, difVaCsBp, plotLegend = False)
+		plotOnAxisWithLayers(ax4, vA)
+		plotOnAxisWithLayers(ax5, cs)
+		plotOnAxisWithLayers(ax6, vA - cs)
 		plotOnAxisWithLayers(ax7, difVaCsBp)
+		#show corona vA values
+		ax4yticks = list(ax4.get_yticks())
+		ax4yticks.remove(14)
+		ax4.set_yticks(ax4yticks + [vA[0], vA[idx[0]]])	
+		#beta plasma == 1
+		indexBeta1 = np.argmin(np.abs(betaPl))
+		ax3.set_xticks(ax3.get_xticks().tolist() + [z[indexBeta1]])	
+		ax3.set_yticks(ax3.get_yticks().tolist() + [betaPl[indexBeta1]])	
 	else:
 		fileName = "fromFile"
 		scaleLog = False
@@ -307,28 +314,43 @@ def integrateFile():
 		ax3.set_ylabel('beta plasma')
 		ax4.set_ylabel('vA (m/s)')
 		ax5.set_ylabel('cs (m/s)')
-		#ax6.set_ylabel('cs/vA')
+		ax6.set_ylabel('vA/cs')
 		ax7.set_ylabel('func(bp, cs/vA)')
 		if scaleLog:
 			fileName = "fromFileLogScale"
-			ax1.set_yscale('log')
-			ax2.set_yscale('log')
-			ax3.set_yscale('log')
-			ax4.set_yscale('log')
-			ax5.set_yscale('log')
-			ax6.set_yscale('log')
-			ax7.set_yscale('log')
-		plotOnAxisWithLayers(ax1, np.exp(pres), plotLegend=False)
-		plotOnAxisWithLayers(ax2, np.exp(rho), plotLegend=False)
-		plotOnAxisWithLayers(ax3, np.exp(betaPl), plotLegend=False)
-		plotOnAxisWithLayers(ax4, np.exp(vA), plotLegend=False)
-		plotOnAxisWithLayers(ax5, np.exp(cs), plotLegend=False)
-		#plotOnAxisWithLayers(ax6, np.exp(difVaCs), plotLegend=False)
-		plotOnAxisWithLayers(ax7, np.exp(difVaCsBp), plotLegend = False)
+			for ax in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
+				ax.set_yscale('log')
+			ax4.get_yaxis().get_major_formatter().labelOnlyBase = False		
+
+		expBetaPl =  np.exp(betaPl)
+		expVA =  np.exp(vA)
+	
+		plotOnAxisWithLayers(ax1, np.exp(pres))
+		plotOnAxisWithLayers(ax2, np.exp(rho))
+		plotOnAxisWithLayers(ax3, expBetaPl)
+		plotOnAxisWithLayers(ax4, expVA)
+		plotOnAxisWithLayers(ax5, np.exp(cs))
+		plotOnAxisWithLayers(ax6, np.exp(vA - cs))
+		plotOnAxisWithLayers(ax7, np.exp(difVaCsBp))
+		#show corona vA values
+		ax4yticks = list(ax4.get_yticks())
+		ax4yticks.remove(1e6)
+		ax4.set_yticks(ax4yticks + [expVA[0], expVA[idx[0]]])	
+		#beta plasma == 1
+		indexBeta1 = np.argmin(np.abs(expBetaPl - 1))
+		ax3xticks = list(ax3.get_xticks())
+		ax3xticks.remove(0)
+		ax3.set_xticks(ax3xticks + [z[indexBeta1]])	
+		ax3.set_yticks(ax3.get_yticks().tolist() + [expBetaPl[indexBeta1]])	
+		
 	
 	f1.savefig("%s1.png" % fileName)
 	f2.savefig("%s2.png" % fileName)
 	f3.savefig("%s3.png" % fileName)
+	f4.savefig("%s4.png" % fileName)
+	f5.savefig("%s5.png" % fileName)
+	f6.savefig("%s6.png" % fileName)
+	f7.savefig("%s7.png" % fileName)
 
 	#no layers
 	#ax1.plot(z, pres)
@@ -341,7 +363,7 @@ def radiative():
 	log10T, lambdaPh, lambdaC = np.loadtxt('dere_etal_table.dat', unpack=True)
 	def plotLambdaPh():
 		plt.xlabel("log10 T (K)")
-		plt.ylabel("LambdaPh (J m**3/s)")
+		plt.ylabel("LambdaPh (erg cm**3/s)")
 		plt.plot(log10T, lambdaPh)
 		plt.grid(True)
 		plt.draw()	
@@ -349,7 +371,7 @@ def radiative():
 		#plt.show()	
 	def plotLambdaC():
 		plt.xlabel("log10 T (K)")
-		plt.ylabel("LambdaC (J m**3/s)")
+		plt.ylabel("LambdaC (erg cm**3/s)")
 		plt.plot(log10T, lambdaC)
 		plt.grid(True)
 		plt.draw()	
@@ -366,17 +388,19 @@ def radiative():
 		atmTemp = temp[atmInd]
 		atmZ = z[atmInd]
 		interpLambdaC = np.interp(np.log10(atmTemp),log10T, lambdaC )
-		atmRho = (np.exp(getRhoLog(getPresLog(False))))[atmInd]
+		atmPres = np.exp((getPresLog(False))[atmInd])
+		atmMu = mmm[atmInd]
+		atmRho = (atmPres * atmMu * 1e-3) / (R * atmTemp)
 		atmNH = atmRho / (1.4 * mH)
-		atmNe = 6/5 * atmNH
-		atmLr = interpLambdaC *  atmNH * atmNe
+		atmNe = 1.2 * atmNH
+		atmLr = interpLambdaC *  atmNH * atmNe * 1e-13 #transform to s.i. units
 		#nt = nh + ne + nhe = nh + nh + 2 nhe + nhe = 2 nh + 3 nhe = 2.3 nh
 		atmNt = 2.3 * atmNH
 		ue = 1.5 * atmNt * kB * atmTemp			
 
 		def plotInterpValues():
 			plt.xlabel("z (Mm)")
-			plt.ylabel("LambdaC (J m**3/s)")
+			plt.ylabel("LambdaC (erg cm**3/s)")
 			plt.plot(atmZ, interpLambdaC)
 			plt.grid(True)
 			plt.draw()	
@@ -387,7 +411,7 @@ def radiative():
 			plt.ylabel("Lr (J / m**3*s)")
 			plt.plot(atmZ, atmLr)
 			plt.grid(True)
-			plt.yscale('log')
+			#plt.yscale('log')
 			plt.draw()	
 			plt.savefig("Lr.png")
 			plt.show()
@@ -408,8 +432,8 @@ def radiative():
 			plt.savefig("ueDivLr.png")
 			plt.show()
 		#plotInterpValues()
-		#plotLrValues()
-		plotUeValues()
+		plotLrValues()
+		#plotUeValues()
 		#plotUeDivLr()
 		
 	
@@ -419,6 +443,8 @@ def radiative():
 	#getTempMax()
 	interpolateLambdaC()
 	
+
+idx = getLayerIndices()	
 
 #plotTemp()
 #plotTempLayers()
