@@ -1,5 +1,0 @@
-montage \
- fromFileLn.png  \
- fromFile.png  \
- fromFileLogScale.png  \
--tile 1x3  -geometry 1000x500+0+0  allfile.png
