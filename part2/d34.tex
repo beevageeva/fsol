@@ -1,0 +1,168 @@
+\documentclass[10pt]{book}
+\usepackage{graphicx}
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+\setlength{\oddsidemargin}{15.5pt} 
+\setlength{\evensidemargin}{15.5pt}
+\pretolerance=2000
+\tolerance=3000
+\renewcommand{\figurename}{Figura}
+\renewcommand{\chaptername}{Cap\'{i}tulo}
+\renewcommand{\contentsname}{\'{I}ndice}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\bibname}{Bibliograf\'{i}a}
+\renewcommand{\appendixname}{Ap\'endices}
+
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=15mm,
+ right=10mm,
+ top=20mm,
+ bottom=20mm,
+ }
+
+\begin{document}
+\paragraph {30.11.2015}
+
+
+\textbf{conducción térmica}
+
+en la ecuación de energía:
+
+$\rho (\frac{\partial \epsilon}{\partial t} + ...) = -p \text{ div } \vec{v} - \text{div } \vec{q} - \mathcal{L}_r $
+
+$\vec{q}$ es el flujo de calor:
+
+$\vec{q} = - \chi \nabla T$
+
+$\chi$  tensor
+
+
+$\chi_{\parallel} = 1.8 \cdot 10^{-10} \frac{T^{\frac{5}{2}}}{ln \Lambda_c}$ para unidades s.i. y donde  $\Lambda_c$ es el logaritmo Coulomb
+  
+
+$\chi_{\perp} = 2 \cdot 10^{-31} \frac{n^2}{T^3 B^2} \chi_{\parallel}$ para unidades s.i. 
+
+
+$\vec{q} = - \chi \nabla T = - \chi_{\parallel} (\vec{e_B} \nabla T ) \vec{e_B} - \chi_{\perp} (\nabla T)_{\perp}$ donde
+$\vec{e_B} = \frac{\vec{B}}{|B|} $
+
+
+\paragraph {1.12.2015}
+
+
+ecuación de movimiento:
+
+\begin{equation}
+\rho (\frac{\partial \vec{v}}{\partial t} + (\vec{v}\nabla) \vec{v}) = - \nabla p + \vec{j} \times \vec{B} + \rho \vec{g} 
+\end{equation}
+donde
+
+$\vec{j} = \frac{1}{\mu_0} curl \vec{B}$ 
+
+y usando la identidad:
+
+$\nabla (\frac{1}{2} \vec{B} \cdot \vec{B}) = \vec{B} \times curl \vec{B} + (\vec{B} \cdot \nabla) \vec{B}  $
+
+la fuerza Lorentz se puede escribir como suma de 2 términos:
+
+$\vec{j} \times \vec{B} = -\nabla (\frac{B^2}{2 \mu_0}) + \frac{1}{\mu_0} (\vec{B}\nabla) \vec{B}$ 
+
+donde el primer término es la fuerza debida a la  presión magnética $p_{mag} = \frac{B^2}{2 \mu_0}$ 
+
+y el segundo la fuerza de curvatura magnética
+
+\begin{description}
+\item
+
+comparamos la fuerza debida a la presión magnética con la fuerza debida a la presión del gas:
+
+
+$\mathcal{O}(\frac{|-\nabla p_{mag}|}{|-\nabla p|}) = \mathcal{O}(\frac{p_{mag}/L_B}{p/L_p}) = \mathcal{O}(\frac{1}{\beta} \frac{L_B}{L_p}) $
+
+donde  notamos $\beta = \frac{p}{p_{mag}}$
+
+
+y $L_B$ y $L_p$ son las escalas de variación de $\vec{B}$ y p y tienen un valor parecido 
+
+
+en la corona $\beta << 1 \implies \mathcal{O}(\frac{|-\nabla p_{mag}|}{|-\nabla p|}) >> 1$
+
+\item
+
+comparamos la fuerza de gravedad con la fuerza debida a la presión magnética:
+
+$\mathcal{O}(\frac{\rho g}{|-\nabla p_{mag}|}) = \mathcal{O}(\frac{\rho g}{\frac{B^2}{2 \mu_0} \frac{1}{L_B} }) = \mathcal{O}(\frac{v_{ff}^2(L_B)}{v_A^2})$
+
+donde $v_{ff}(L) = 2 g L $ es la velocidad free fall  y $v_A$ es la velocidad Alfvén $v_A^2 = \frac{B^2}{\mu_0 \rho}$
+
+
+en la corona $v_{ff} << v_A \implies \mathcal{O}(\frac{\rho g}{|-\nabla p_{mag}|} << 1$
+
+
+\item
+
+ahora comparamos el segundo término del lado izquierdo de la ecuación de movimiento con la fuerza de la presión magnética(el primero se puede despreciar):
+
+
+$\mathcal{O}(\frac{\rho (\vec{v}\nabla)\vec{v}}{|-\nabla p_{mag}|})  = \mathcal{O}(\frac{v^2}{L_v} \cdot \frac{2 L_B}{v_A^2})$
+
+
+las velocidades típicas de la corona $|v| \approx$ 100 km /s y $v_A \approx$ 1000-2000km/s
+
+$\implies \mathcal{O}(\frac{\rho (\vec{v}\nabla)\vec{v}}{|-\nabla p_{mag}|}) << 1$
+
+
+\end{description}
+
+Para que la ecuación de movimiento se cumpla $\vec{F_L} \approx 0$:
+
+$\vec{j}\times \vec{B} = 0$ (force free)
+
+$\implies \vec{j}\parallel \vec{B}$
+
+$\implies \vec{j} = \alpha \vec{B}$
+
+Caso 1:
+
+$\alpha = 0 \implies \vec{j} = 0$ (current free)
+
+$\implies curl \vec{B} = 0$ (potential field)
+
+$\implies \exists \Psi | \nabla \Psi = \vec{B}$
+
+$\text{div} \vec{B} = 0 \implies \Delta \Psi = 0$
+
+$\implies \frac{\partial \Delta \Psi}{\partial x_i} = 0$ 
+
+$\implies \Delta(\frac{\partial  \Psi}{\partial x_i}) = 0$ 
+
+$\implies \Delta(B_i) = 0$ 
+
+para  i $\in$ {1,2,3}
+
+Condiciones de contorno
+
+\begin{itemize}
+
+\item d'Alembert (no se usan aquí)
+
+\item Neumann:
+
+$\exists! \Psi$ (salvo una constante) que cumple la ecuación
+
+ $\Delta \Psi = 0$ con   valores en el contorno:
+
+$\vec{n} \cdot \nabla \Psi |_{\partial V} = B_n |_{\partial V}$
+
+donde $\partial V$ es la superficie de contorno
+
+\end{itemize}
+
+
+\end{document}

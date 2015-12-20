@@ -1,0 +1,6 @@
+montage \
+ fromFile.png  \
+ fromFileFw.png  \
+ fromFileLn.png  \
+ fromFileLnFw.png  \
+-tile 2x2  -geometry 400x300+1+1  allfile.png
