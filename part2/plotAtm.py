@@ -307,7 +307,10 @@ def getPresLog(calcFw):
 
 def integrateFile():
 	"""
-		plots all the graphics: pres, rho, plasma b, vA,  cs , vA / cs, func(beta p, vA, cs) see def of func in the pdf
+		plot all the graphics: pres, rho, plasma b, vA,  cs , vA / cs, func(beta p, vA, cs) see def of func in the pdf
+		and save to png files
+		change in the code below calcFw to True in order to use forward integration; plotLog to True in order to plot ln values
+		and scaleLog to False if you don't want log10 oy scales (in the case plotLog = False)
 	"""
 	#plotLog = True
 	plotLog = False
@@ -550,7 +553,9 @@ def radiative():
 	#getTempMax()
 	interpolateLambdaC()
 	
-#we calculate the indices only once
+"""
+	we calculate the indices where layers start only once. we use temp conditions described in the pdf
+"""
 idx = getLayerIndices()	
 
 #plotTemp()
@@ -560,7 +565,7 @@ idx = getLayerIndices()
 #plotNHDivNeLayers()
 #plotHp()
 #analyticTest()
-#integrateFile()
-radiative()
+integrateFile()
+#radiative()
 
 
