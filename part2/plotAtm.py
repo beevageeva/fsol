@@ -318,6 +318,8 @@ def integrateFile():
 	#calcFw = True
 	pythonTest = True
 	#pythonTest = False
+	#saveDensFile = True
+	saveDensFile = False
 	pres = getPresLog(calcFw)
 	if pythonTest:
 
@@ -343,6 +345,8 @@ def integrateFile():
 		f.savefig("fromFilePyTest.png")
 		
 	rho =  pres + np.log(mmm * 1e-3) - np.log(R) - np.log(temp)
+	if saveDensFile:
+		np.savetxt("density.txt", [z, np.exp(rho)])
 	B = np.log(1e-3) #measured in T = 10G
 	gamma = np.log(5/3)
 	from math import pi as mathPi
@@ -541,7 +545,7 @@ def radiative():
 			plt.plot(atmZ, ue / atmLr)
 			plt.grid(True)
 			plt.draw()	
-			plt.savefig("ueDivLrREVERSED.png")
+			plt.savefig("ueDivLr.png")
 			plt.show()
 		#plotInterpValues()
 		#plotLrValues()
@@ -567,7 +571,7 @@ idx = getLayerIndices()
 #plotNHDivNeLayers()
 #plotHp()
 #analyticTest()
-#integrateFile()
-radiative()
+integrateFile()
+#radiative()
 
 
