@@ -53,8 +53,7 @@ def plotHeating(proj=False):
 	yh = 0.4
 	xl = -4.2
 	xr = 4.2
-	print("Y SHAPE ")
-	print(y.shape)
+	heatbg = 1.5e-2 * np.exp(-y/5)	
 	cy = np.zeros(y.shape)
 	for i in range(y.shape[0]):
 		for j in range(y.shape[1]):
@@ -69,17 +68,19 @@ def plotHeating(proj=False):
 		ax.set_xlabel("x")
 		ax.set_ylabel("y")
 		#ax.plot_surface(x,y,cy)
-		ax.plot_surface(x,y,heat)
+		#ax.plot_surface(x,y,heat)
+		ax.plot_surface(x,y,heat + heatbg)
 	else:
 		ax = fig.add_subplot(111)
 		ax.set_xlabel("y")
 		ax.set_ylabel("x")
-		ax.imshow(heat)
+		#ax.imshow(heat)
+		ax.imshow(heatbg + heat)
 
 #plotImpl(True)
 #plotStr()
 #plotMag()
-plotHeating()
+plotHeating(True)
 		
 plt.draw()
 plt.show()
