@@ -36,12 +36,14 @@ def plotStr():
 	ax = fig.add_subplot(111)
 	ax.set_xlabel("y")
 	ax.set_ylabel("x")
-	ax.streamplot(y,x,Bx,By)
+	magB = np.sqrt(Bx**2+By**2)
+	normMag = magB / magB.max()
+	ax.streamplot(y,x,Bx,By, color=normMag, linewidth=normMag*5)
 
 def plotMag():
 	ax = fig.add_subplot(111)
-	ax.set_xlabel("x")
-	ax.set_ylabel("y")
+	ax.set_xlabel("y")
+	ax.set_ylabel("x")
 	ax.imshow(np.sqrt(Bx**2,By**2))
 
 
@@ -74,10 +76,10 @@ def plotHeating(proj=False):
 		ax.set_ylabel("x")
 		ax.imshow(heat)
 
-#plotImpl()
-plotStr()
+#plotImpl(True)
+#plotStr()
 #plotMag()
-#plotHeating()
+plotHeating()
 		
 plt.draw()
 plt.show()
