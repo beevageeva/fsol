@@ -1,9 +1,18 @@
-\documentclass[tikz,border=1cm]{standalone} 
+\documentclass[tikz,border=1cm]{book} 
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
 \usepackage{tikz-3dplot} 
 \begin{document}
 
+
+\begin{equation}
+	\vec{v_f} = \frac{1}{q} \frac{\vec{F} \times \vec{B}}{B^2} 
+\end{equation}
+
+
 \tdplotsetmaincoords{60}{150} 
-\begin{tikzpicture} [scale=3, tdplot_main_coords, axis/.style={->,blue,thick}, 
+\begin{tikzpicture} [scale=2, tdplot_main_coords, axis/.style={->,blue,thick}, 
 vector/.style={-stealth,red,very thick}, 
 vector guide/.style={dashed,red,thick}]
 
@@ -35,4 +44,154 @@ vector guide/.style={dashed,red,thick}]
 \draw[vector] (O) -- (I);
 
 \end{tikzpicture}
+
+
+\tdplotsetmaincoords{60}{150} 
+\begin{tikzpicture} [scale=2, tdplot_main_coords, axis/.style={->,blue,thick}, 
+vector/.style={-stealth,red,very thick}, 
+vector guide/.style={dashed,red,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+
+
+\coordinate (P) at (1,0,0);
+\node[tdplot_main_coords,anchor=west] at (1,0,0){$\vec{B}$};
+\coordinate (G) at (0,0,-1);
+\node[tdplot_main_coords,anchor=east] at (0,0,-1){$\vec{g}$};
+\coordinate (L) at (0,0,1);
+\node[tdplot_main_coords,anchor=east] at (0,0,1){$\vec{F_L} = \vec{J} \times \vec{B}$};
+\node[tdplot_main_coords,anchor=south] at (0,0,0){O};
+\coordinate (I) at (0,-1,0);
+\node[tdplot_main_coords,anchor=south] at (0,-1,0){$\vec{J}$};
+
+%draw axes
+\draw[axis] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
+
+%draw a vector from O to P
+\draw[vector] (O) -- (P);
+\draw[vector] (O) -- (G);
+\draw[vector] (O) -- (L);
+\draw[vector] (O) -- (I);
+
+\end{tikzpicture}
+
+5 species: electrons, H , $H^+$,  He, $He^+$
+
+temperature and density constant?
+
+Horizontal drifts(for charges) increased by frictional forces which in this case sum to gravity 
+
+Vertical drifts due to horizontal collisional forces:
+
+Downwards
+ions ($He^+$):
+
+\tdplotsetmaincoords{60}{150} 
+\begin{tikzpicture} [scale=2, tdplot_main_coords, axis/.style={->,blue,thick}, 
+vector/.style={-stealth,red,very thick}, 
+vector guide/.style={dashed,red,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+
+
+\coordinate (P) at (1,0,0);
+\node[tdplot_main_coords,anchor=west] at (1,0,0){$\vec{B}$};
+\node[tdplot_main_coords,anchor=south] at (0,0,0){O};
+
+\coordinate (F) at (0,1,0);
+\node[tdplot_main_coords,anchor=south] at (0,1,0){$\vec{F_c}$};
+
+\coordinate (D) at (0,0,-1);
+\node[tdplot_main_coords,anchor=south] at (0,0,-1){$\vec{u_d}$};
+
+%draw axes
+\draw[axis] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
+
+%draw a vector from O to P
+\draw[vector] (O) -- (P);
+\draw[vector] (O) -- (F);
+\draw[vector] (O) -- (D);
+
+\end{tikzpicture}
+
+electrons:
+
+\tdplotsetmaincoords{60}{150} 
+\begin{tikzpicture} [scale=2, tdplot_main_coords, axis/.style={->,blue,thick}, 
+vector/.style={-stealth,red,very thick}, 
+vector guide/.style={dashed,red,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+
+
+\coordinate (P) at (1,0,0);
+\node[tdplot_main_coords,anchor=west] at (1,0,0){$\vec{B}$};
+\node[tdplot_main_coords,anchor=south] at (0,0,0){O};
+
+\coordinate (F) at (0,-1,0);
+\node[tdplot_main_coords,anchor=south] at (0,-1,0){$\vec{F_c}$};
+
+\coordinate (D) at (0,0,-1);
+\node[tdplot_main_coords,anchor=south] at (0,0,-1){$\vec{u_d}$};
+
+%draw axes
+\draw[axis] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
+
+%draw a vector from O to P
+\draw[vector] (O) -- (P);
+\draw[vector] (O) -- (F);
+\draw[vector] (O) -- (D);
+
+\end{tikzpicture}
+
+Upwards : ions  ($H^{+}$)
+
+\tdplotsetmaincoords{60}{150} 
+\begin{tikzpicture} [scale=2, tdplot_main_coords, axis/.style={->,blue,thick}, 
+vector/.style={-stealth,red,very thick}, 
+vector guide/.style={dashed,red,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+
+
+\coordinate (P) at (1,0,0);
+\node[tdplot_main_coords,anchor=west] at (1,0,0){$\vec{B}$};
+\node[tdplot_main_coords,anchor=south] at (0,0,0){O};
+
+\coordinate (F) at (0,-1,0);
+\node[tdplot_main_coords,anchor=south] at (0,-1,0){$\vec{F_c}$};
+
+\coordinate (D) at (0,0,1);
+\node[tdplot_main_coords,anchor=south] at (0,0,1){$\vec{u_d}$};
+
+%draw axes
+\draw[axis] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
+
+%draw a vector from O to P
+\draw[vector] (O) -- (P);
+\draw[vector] (O) -- (F);
+\draw[vector] (O) -- (D);
+
+\end{tikzpicture}
+
 \end{document}
