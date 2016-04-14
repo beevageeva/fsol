@@ -294,12 +294,12 @@ def getPresLog(calcFw):
 		calculates ln p using p(zmax) = 5.219e-3 (hardcoded) by integrating forward if calcFw param is True and backwards otherwise
 		-1 / Hp with Hp calculated with the data from the file
 	"""
-	pF = np.log(5.219e-3) #Pa
 	func = -(mmm * 1e-3 * gSun)  / (temp * R)
 	if calcFw:
 		pI = np.log(4.469126e+06) 
 		pres = integrateFuncFw(z*1e6, pI, func)
 	else:
+		pF = np.log(5.219e-3) #Pa
 		pres = integrateFunc(z*1e6, pF, func)
 	return pres
 
