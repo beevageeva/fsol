@@ -1,0 +1,157 @@
+\documentclass{beamer}
+
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Madrid}       % or try default, Darmstadt, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{serif}    % or try default, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings,angles}
+\usepackage{tikz-3dplot} 
+
+\usepackage{amsmath}
+
+
+\begin{document}
+
+
+
+
+\begin{frame}{Spectroscopy}
+2 low resolution gratings for infrared windows at 10 and 20 $\mu m$:
+
+\begin{itemize}
+\item 7.5 - 13.5 $\mu m$, R = 175
+\item 16.0 - 25.0 $\mu m$, R = 120
+\end{itemize}
+
+where R (spectral resolution) = $\frac{\lambda}{\delta \lambda}$
+
+adimensional measure of  $\delta \lambda$ (spectral purity or spectral resolution element):
+the smallest measurable wavelength difference at a given wavelength = $f(\lambda)$
+
+
+\end{frame}
+\begin{frame}{Spectroscopy}
+
+10 $\mu $ window also has a high resolution grating
+\begin{tabular}{|c|c|c|}
+\hline
+Characteristics & 	LR	& HR \\
+\hline
+Central $\lambda_c(\mu m)$	& 10.5	& 10.5 \\
+\hline
+Blaze $\lambda (\mu m)$ &	9.87	& 10.08 \\
+\hline
+Blaze Angle ($^{\circ}$) & 	2.6	& 16.4 \\
+\hline
+Lines/mm	& 9.1 &	56.0 \\
+\hline
+$\delta \lambda_{Det} (\mu m)$ &	6	& 0.98 (0.65 for $\lambda_c = 10.5 \mu m$)\\
+\hline
+Angle of incidence ($^{\circ}$)	& 14.8 &	29.5\\
+\hline
+Angle diffraction ($^{\circ}$) at $\lambda_c$	& 9.2	& 5.5\\
+\hline
+R	& 175	& 1300\\
+\hline
+Smallest Resolvable $ \delta \lambda (\mu m)$ &	0.06	&0.008 \\
+\hline
+\end{tabular}
+\end{frame}
+\begin{frame}{Spectroscopy}
+
+20 $\mu $ window moderate  resolution grating
+
+\begin{itemize}
+\item $\delta \lambda = 0.45 \mu m$ for $\lambda_c = 20.5 \mu m$ 
+\item R = 890
+\end{itemize}
+
+\end{frame}
+\begin{frame}{Spectroscopy}
+Spectrum dispersed along the long axis of the array (320 pixels)
+
+Each resolution element is sampled by aprox. 5 pixels for low resolution gratings
+
+\end{frame}
+\begin{frame}{Polarimetry}
+
+\begin{itemize}
+\item half wave plate (retarder with $\delta = \pi$)
+\item  a focal plane mask which prevents overlap of the orthogonally polarized images for extended sources
+\item cadmium selenide (CdSe) Wollaston prism (an optical device which separates  unpolarized light into two orthogonal 
+linearly polarized outgoing beams)
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.4]{img1.png}
+\end{figure}
+\end{itemize}
+
+\end{frame}
+\begin{frame}{Polarimetry}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{img2.png}
+\caption{Polarimeter}
+\end{figure}
+\begin{itemize}
+\item $\vec{e_1}$, $\vec{e_2}$  reference system in object plane
+\item $\alpha $ angle between $\vec{e_1}$ and fast axis of the retarder 
+\item $\beta $ angle between $\vec{e_1}$ and acceptance axis of the polarizer
+\item $\delta$ phase differnce between fast and slow axis induced by the retarder ($\pi$ in case of HWP)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Polarimetry}
+\begin{itemize}
+\item at the entrance of the retarder in basis $\vec{e_1},\vec{e_2}$:
+\begin{itemize}
+\item $E_1 = \epsilon_1 e^{-i \omega t}$
+\item $E_2 = \epsilon_2 e^{-i \omega t}$
+
+\end{itemize}
+
+
+\item rotation (in slow axis, fast axis basis: S.R of the retarder)
+\begin{itemize}
+\item $E_f = (\epsilon_1 cos \alpha + \epsilon_2 sin \alpha) e^{-i \omega t}$
+\item $E_s = (-\epsilon_1 sin \alpha + \epsilon_2 cos \alpha) e^{-i \omega t}$
+\end{itemize}
+\item at the exit of the retarder (in the same basis: S.R of the retarder)
+\begin{itemize}
+\item $E_f = (\epsilon_1 cos \alpha + \epsilon_2 sin \alpha) e^{-i \omega t}$
+\item $E_s = (-\epsilon_1 sin \alpha + \epsilon_2 cos \alpha)e^{i \delta} e^{-i \omega t}$
+\end{itemize}
+\item at the exit of the retarder (rotation $\beta - \alpha$ : in the S.R. of the polarizer)
+the component along acceptance axis:
+
+$E_a = cos(\beta - \alpha) E_f + sin(\beta - \alpha) E_s \implies $
+
+\begin{equation}
+E_a = \[cos(\beta - \alpha) (\epsilon_1 cos \alpha + \epsilon_2 sin \alpha) + 
+sin(\beta - \alpha ) (-\epsilon_1 sin \alpha + \epsilon_2 cos \alpha)e^{i \delta} \]
+e^{-i \omega t}
+
+\end{equation}
+
+
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Polarimetry}
+to recover Stokes parameters we need 
+the HWP rotates automatically between the four position angles of 0$^{\circ}$, 45$^{\circ}$, 22.5$^{\circ}$ and 67.5$^{\circ}$
+\end{frame}
+
+\end{document}
