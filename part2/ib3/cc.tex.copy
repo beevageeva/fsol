@@ -21,85 +21,8 @@
 
 \begin{document}
 
-\begin{frame}{CanariCam}
-
-\begin{itemize}
-\item CanariCam is a mid-infrared imager with spectroscopic, coronagraphic, and polarimetric capabilities. \\~\\
-
-\item It is optimized for excellent image quality across the 8-26 $\mu m$  window. The optical design is such that CanariCam is diffraction limited at 8 $\mu m$ (Nyquist sampling the 8 μm PSF).
-\end{itemize}
-\end{frame}
 
 
-\begin{frame}{Gran telescopio de canarias (GTC)}
-\begin{columns}
-\begin{column}{0.45\textwidth}
-\begin{center}
-\includegraphics[scale=0.30]{imgr2.png}
-\end{center}
-\end{column}
-
-\begin{column}{0.45\textwidth}
-\begin{center}
-\includegraphics[height=0.41\textheight]{imgr1.png}
-\end{center}
-\end{column}
-\end{columns}
-\end{frame}
-
-
-
-
-\begin{frame}{Optical layout}
-
-\begin{itemize}
-\item There are three powered mirrors and five folding flats (four fixed and one movable on the grating turret). All the mirrors are gold coated, which provides a combined reflectivity of $92\%$. \\~\\
-
-\item CanariCam is equipped with a suite of narrow-band and broad-band $10$ and $20~\mu m$ filters,
-located within two filter wheels immediately after the Lyot-stop wheel at the first pupil
-image.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Optical Layout}
-
-\begin{columns}
-
-\begin{column}{0.5\textwidth}
-\begin{center}
-\includegraphics[scale=0.22]{imgr5.png}
-\end{center}
-\end{column}
-
-\begin{column}{0.45\textwidth}
-\begin{center}
-\includegraphics[scale=0.22]{imgr6.png}
-\end{center}
-\end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}{Detector characteristics}
-\begin{center}
-\includegraphics[scale=0.35]{imgr7.png}
-\end{center}
-\end{frame}
-
-\begin{frame}{Quantum efficiency of detector}
-\begin{center}
-\includegraphics[scale=0.35]{imgr8.png}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\begin{figure}[H]
- \centering
- \includegraphics[scale=0.32]{img9.png}
-\end{figure}
-Typically for each grating there will be 2 slits available corresponding to the resolution and two times the resolution at the 
-maximum wavelength (1 and 2 $\lambda$/D)
-\end{frame}
 
 \begin{frame}{Spectroscopy}
 
@@ -172,18 +95,40 @@ Smallest Resolvable $ \delta \lambda (\mu m)$ &	0.06	&0.008 \\
 \begin{frame}{Spectroscopy}
 
 20 $\mu $ window (16.0 - 25.0 $\mu m$)  low and high resolution grating
+\begin{tabular}{|c|c|c|}
+\hline
+Characteristics & 	LR	& HR \\
+\hline
+Central $\lambda_c(\mu m)$	& 20.5	& 20.5 \\
+\hline
+Blaze $\lambda (\mu m)$ &	19.96	& 20.18 \\
+\hline
+Blaze Angle ($^{\circ}$) & 	4.0	& 20.8 \\
+\hline
+Lines/mm(N)	& 6.1 &	35.2 \\
+\hline
+$\delta \lambda_{Det} (\mu m)$ &	9	& 1.54 ($0.45 \mu m$ for $\lambda_c = 20.5 \mu m$)\\
+\hline
+Angle of incidence ($^{\circ}$)	& 15.7 &	33.7\\
+\hline
+Angle diffraction ($^{\circ}$) at $\lambda_c$	& 8.3	& 9.7\\
+\hline
+R	& 120	& 890\\
+\hline
+Smallest Resolvable $ \delta \lambda (\mu m)$ &	0.17	&0.025 \\
+\hline
+\end{tabular}
 
-\begin{itemize}
-\item R = 120
-\item R = 890, $\delta \lambda = 0.45 \mu m$ for $\lambda_c = 20.5 \mu m$ 
-\end{itemize}
 
-
-Spectrum dispersed along the long axis of the array (320 pixels)
-
-Each resolution element is sampled by aprox. 5 pixels for low resolution gratings
 
 \end{frame}
+
+\begin{frame}{Spectroscopy}
+Spectrum dispersed along the long axis of the array (320 pixels)
+
+Each resolution element is sampled by approx. 5 pixels for low resolution gratings
+\end{frame}
+
 \begin{frame}{Spectroscopy(sensitivity)}
 \begin{figure}[H]
  \centering
@@ -365,8 +310,23 @@ so that the science target switches chop positions between the two nod positions
 \end{frame}
 
 
-\begin{frame}{Polarimetry}
-It is possible to chop off the detector or to chop on the detector. In the former case the source will not be present in the off-source image, while in the later case the source will appear in the off-source images
+\begin{frame}{Chop methods}
+\begin{itemize}
+\item The secondary mirror of the telescope is then moved slightly
+away from the nominal position so that the program object moves out of the field of view
+of the camera and another set of images is acquired. This procedure, called a “chop”
+cycle, is repeated many times at typically a 2-10 Hz rate moving back and forth between 
+"on-source" and "off-source" positions. A "chop-differenced" signal is formed by taking
+the difference between the on-source and off-source images.
+
+\item In the on-chip method, the
+chopper throw is set to be less than the detector array field-of-view so that the source
+remains "on chip" in both chopper positions, i.e. in both the "on-source" and "off-source"
+chopper positions as referred to in the standard method. Note that since the source is present in both positions of the
+chopper, the chop-differenced frame will contain both a positive and negative image of
+the source 
+
+\end{itemize}
 \end{frame}
 
 
