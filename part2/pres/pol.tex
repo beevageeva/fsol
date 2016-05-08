@@ -91,6 +91,8 @@ than on earth concentrated in spots as large as earth (the sunspots)
 \item coronal heating: above the photosphere at around 6000 K the temperature rises abruptly at over 1 million degrees 
 \end{itemize}
 
+We can only see to a certain depth in the atmosphere so a theoretical model of  sun is needed.
+
 \end{frame}
 
 
@@ -98,14 +100,14 @@ than on earth concentrated in spots as large as earth (the sunspots)
 Sun as a plasma(a gas containing neutral and charged particles, but globally electrically neutral with collective behaviour)
 \begin{itemize}
 \item main sequence star burning hydrogen into helium into its core
-\item the sun atmosphere is composed mainly of H and He (the proportion of number of atoms H:He is 10:1 and the metallicity estimated Z = 0.0122)
+\item the sun atmosphere is composed mainly of H and He (the estimated proportion of number of atoms H:He is 10:1 and metallicity Z = 0.0122)
 \item neutral atoms in the photosphere  start to become ionized in the chromosphere where temperature starts to rise and  
 are fully ionized in the corona  
 \end{itemize}
 Plasma models
 \begin{itemize}
 \item fluid mechanics equations derived (in statistical physics) from Boltzmann equation 
-for variables like density, pressure and velocity
+for the evolution of variables like density, pressure and velocity
 \item induction equation derived from Maxwell equations and Ohm law for the evolution of the magnetic field
 \end{itemize}
 
@@ -116,13 +118,40 @@ for variables like density, pressure and velocity
 \item system of first order non linear partial differential equations which must be integrated in time
 \item Approximations:
 \begin{itemize}
-\item MHD: all the particles are considered as a whole. Assumption: strongly collisional plasma. A system of 8 unknown variables
+\item MHD-1fluid: all the particles are considered as a whole. Assumption: strongly collisional plasma. A system of 8 unknown variables
 ($p,\rho,v_x,v_y,v_z,B_x,B_y,B_z$)
 \item 2-fluid: Neutral particles do not feel electromagnetic forces and may move  differently from charged particles so collision rates between 
 charged particles and neutral particles may not be the same like inside one specie. 
 We consider the fluid variables ($p,\rho,v_x,v_y,v_z$) different for charged and neutral particles. A system of 13 unknown variables.
-\item furthermore we could split the charges into ions and electrons as sometimes forces act differently on them
+\item furthermore we could split the charges into ions and electrons as sometimes forces act differently on them or even consider each specie of ions
+in order to gain more resolution over the process
 \end{itemize}
 \end{itemize}
+\end{frame}
+\begin{frame}{Partially ionized plasma}
+While 1fluid is a good approximation for photosphere (all neutral) or corona (all ionized) it might not be so precise 
+for the chromosphere and transition region where plasma is partially ionized and we try to apply the 2 fluid approximation
+\begin{itemize}
+\item integrate numerically the 13 equations in order to get time evolution
+\item initial conditions based on observations 
+\end{itemize}
+By having more knowledge of the evolution of different kind of particles we hope to understand better things that are not very clear yet like
+the wave propagation in the sun atmosphere or the heating in its  upper  part.
+
+\end{frame}
+\begin{frame}{Simulation}
+\begin{itemize}
+\item generation of initial conditions (python)
+\item executing fortran 90  parallel code which solves the PDE system and outputs the results in hdf5 files
+\item visualization  and analysis (visit or python)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Test result in visit}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.24]{visit.png}
+  \caption{density of charges and neutrals in Orszag test after 474 iterations where they evolve independently (collision terms between neutrals and charges are set to 0)}
+\end{figure}
 \end{frame}
 \end{document}
