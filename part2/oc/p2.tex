@@ -1,0 +1,46 @@
+\documentclass[10pt]{book}
+\usepackage{graphicx}
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\setlength{\oddsidemargin}{15.5pt} 
+\setlength{\evensidemargin}{15.5pt}
+\pretolerance=2000
+\tolerance=3000
+\renewcommand{\figurename}{Figura}
+\renewcommand{\chaptername}{Cap\'{i}tulo}
+\renewcommand{\contentsname}{\'{I}ndice}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\bibname}{Bibliograf\'{i}a}
+\renewcommand{\appendixname}{Ap\'endices}
+
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=5mm,
+ right=5mm,
+ top=5mm,
+ bottom=5mm,
+ }
+
+\begin{document}
+
+\paragraph{H3 p2}
+
+partícula de masa = 1 en reposo $\implies E = c^2$  (la energía total es la energía de su masa en reposo)
+
+eq 3.6 apuntes $\implies (1-\frac{r_s}{r}) \frac{dt}{d\tau} = 1 \implies \frac{d\tau}{dt} = 1-\frac{r_s}{r}  $
+
+apuntes: $\tau(r) = \frac{1}{c} (\frac{R^3}{r_s})^{\frac{1}{2}} [(\frac{r}{R} -\frac{r^2}{R^2})^{\frac{1}{2}} + cos^{-1}(\sqrt{\frac{r}{R}}) ] $
+
+$r = R \frac{1+cos \eta}{2} \implies \tau(\eta) = \frac{1}{c} (\frac{R^3}{r_s})^{\frac{1}{2}} [(\frac{1+cos \eta}{2} -(\frac{1+cos \eta}{2}) ^2)^{\frac{1}{2}} + cos^{-1}(\sqrt{\frac{1+cos \eta}{2}}) ] $
+
+$\frac{d\tau}{d\eta} = ...$
+
+$\frac{d\tau}{d\eta} \frac{d\eta}{dt} = 1-\frac{r_s}{r} \implies \frac{dt}{d\eta} =  (1-\frac{2 r_s}{R(1+cos \eta)})^{-1} ... $
+
+\end{document}
