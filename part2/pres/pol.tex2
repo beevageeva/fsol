@@ -28,60 +28,55 @@
 \maketitle
 \end{frame}
 
-\begin{frame}[t]{Sun atmosphere layers}
-\vspace*{-22pt}
-\begin{columns}[b]
-    \begin{column}{0.6\textwidth}
-		Photosphere
-        \begin{itemize}
-					\item collisions dominated: LTE, MHD 
-					\item	relatively easy observations 
-					\item	diagnostics techniques well developed 
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-       % \rule{\textwidth}{0.75\textwidth}
-			\begin{figure}[t]
-			 \includegraphics[scale=0.08]{phot.jpg}
-			\end{figure}
-    \end{column}
-\end{columns}
+\begin{frame}{Sun atmosphere layers}
+\begin{itemize}
+\item photosphere
+\item chromosphere
+\item transition region
+\item corona
 
-\begin{columns}[b]
-    \begin{column}{0.6\textwidth}
-		Chromosphere
-        \begin{itemize}
-					\item not fully collisionally coupled: NLTE, No MHD (frequently not taken into account)
-					\item very few spectral lines 
-					\item complicated radiative diagostics 
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-       % \rule{\textwidth}{0.75\textwidth}
-			\begin{figure}[t]
-			 \centering
-			 \includegraphics[scale=0.03]{chrom.png}
-			\end{figure}
-    \end{column}
-\end{columns}
+\end{itemize}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{layers.jpg}
+\end{figure}
+\end{frame}
 
-\begin{columns}[c]
-    \begin{column}{0.6\textwidth}
-		Corona
-        \begin{itemize}
-					\item magnetically dominated 
-					\item very low density
-					\item all ionized, MHD can be applied
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-			\begin{figure}[t]
-			 \centering
-			 \includegraphics[scale=0.11]{corona.jpg}
-			\end{figure}
-    \end{column}
-\end{columns}
+\begin{frame}{Photosphere}
+\begin{itemize}
+\item collisions dominated: LTE, MHD 
+\item relatively easy observations
+\item diagnostics techniques well developed
+\end{itemize}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.2]{phot.jpg}
+\end{figure}
+\end{frame}
 
+\begin{frame}{Chromosphere}
+\begin{itemize}
+\item not fully collisionally coupled: NLTE, No MHD (frequently not taken into account)
+\item very few spectral lines 
+\item cmplicated radiative diagostics 
+\end{itemize}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.1]{chrom.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Corona}
+\begin{itemize}
+\item magnetically dominated 
+\item very low density
+
+\item diagnostics techniques well developed
+\end{itemize}
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.2]{phot.jpg}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Plasma models}
