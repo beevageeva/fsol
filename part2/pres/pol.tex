@@ -23,6 +23,9 @@
 
 \title[Two-fluid simulations]  
 {Two-fluid simulations of solar partially ionized atmosphere }
+\author[]{Beatrice Popescu Braileanu }
+\institute[]{PhD advisors: \and Angel de Vicente \and %
+                      Elena Khomenko}
 
 \begin{frame}
 \maketitle
@@ -99,22 +102,21 @@ in order to gain more resolution over the process
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}{Partially ionized plasma}
-While 1fluid is a good approximation for photosphere (all neutral) or corona (all ionized) it might not be so precise 
-for the chromosphere and transition region where plasma is partially ionized and we try to apply the 2 fluid approximation
-\begin{itemize}
-\item integrate numerically the 13 equations in order to get time evolution
-\item initial conditions based on observations 
-\end{itemize}
-By having more knowledge of the evolution of different kind of particles we hope to understand better things that are not very clear yet like
-the wave propagation in the sun atmosphere or the heating in its  upper  part.
 
-\end{frame}
-\begin{frame}{Simulation}
+\begin{frame}{My work}
+\begin{itemize}
+\item including 2 fluid equations into  Mancha code
+\begin{itemize}
+\item fortran 90
+\item parallelization with MPI
+\item output in hdf5
+\end{itemize}
+\item making 2-fluid simulation
 \begin{itemize}
 \item generation of initial conditions (python)
-\item executing fortran 90  parallel code which solves the PDE system and outputs the results in hdf5 files
+\item executing the code
 \item visualization  and analysis (visit or python)
+\end{itemize}
 \end{itemize}
 \end{frame}
 
