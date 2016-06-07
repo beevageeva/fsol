@@ -246,11 +246,11 @@ $<{\delta_r}^2> = \frac{1}{2\pi^2}\int_0^\infty{P(k){W_r}^2(k) k^2 dk }$
 
 donde $W_r(k)$ es la funcion ventana que es la transformada fourier de la función de apartenencia a la esfera de radio r (tiene valor 1 para los puntos dentro de la esfera y 0 para los de afuera)
 
-$W_r(k) = \frac{3}{kr}(sin(kr) - kr cos(kr))$ 
+$W_r(k) = \frac{3}{(kr)^3}(sin(kr) - kr cos(kr))$ 
 
 $\implies <{\delta_r}^2> = \frac{9 }{2\pi^2 r^2}\int_0^\infty{P(k)(sin(kr) - k r cos(kr))^2 dk }$
 
-$= \frac{9 \sigma_8^2 19843}{2\pi^2 r^2}\int_0^\infty{\frac{1}{k}(ln(1+11.14k))^2 
+$= \frac{9 \sigma_8^2 19843}{2\pi^2 r^6}\int_0^\infty{k^3(ln(1+11.14k))^2 
 (1+18.5k + 5880k^2+17520k^3 + 1.04 \cdot 10^8 k^4)^{\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
 
 \paragraph{5}
