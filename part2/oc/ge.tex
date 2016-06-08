@@ -248,32 +248,40 @@ donde $W_r(k)$ es la funcion ventana que es la transformada fourier de la funci�
 
 $W_r(k) = \frac{3}{(kr)^3}(sin(kr) - kr cos(kr))$ 
 
-$\implies <{\delta_r}^2> = \frac{9 }{2\pi^2 r^2}\int_0^\infty{P(k)(sin(kr) - k r cos(kr))^2 dk }$
+$\implies <{\delta_r}^2> = \frac{9 }{2\pi^2 r^6}\int_0^\infty{\frac{1}{k^4} P(k)(sin(kr) - k r cos(kr))^2 dk }$
 
 $= \frac{9 \sigma_8^2 19843}{2\pi^2 r^6}\int_0^\infty{k^3(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17520k^3 + 1.04 \cdot 10^8 k^4)^{\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
 
 \paragraph{5}
 
-universo dominado por radiaci처n $\implies a \propto t^\frac{1}{2}$
+soluci처n general con A, B constantes:
 
-modo creciente: $\delta \propto t$
+$\delta = A t - \frac{B}{t}$
+
+$\implies \dot \delta = A + \frac{B}{t^2}$
+
+condiciones iniciales $\delta_0=\delta(t=t_0) $ y $\dot\delta_0 = \dot\delta(t=t_0)$
+
+Consideramos solo la situaci처n $\delta_0 = 0$ y $\dot\delta_0 \neq 0$ (la situaci처n $\delta_0 \neq 0$ y $\dot\delta_0 = 0$ 
+no es una condici처n inicial real porque no puede haber una fluctuaci처n sin que haya un cambio)
+
+$\implies A t_0 = \frac{B}{t_0} \implies B = A t_0^2$
+
+$\implies \dot\delta_0 = A + \frac{1}{t_0^2} A t_0^2 = 2 A \implies A = \frac{1}{2} \dot\delta_0$
+
+Consideramos ahora solo el modo creciente:
+
+$\delta = A t$
+
+$\dot \delta = A \implies \delta = \dot\delta t \implies \delta_0 = \dot\delta_0 t_0$
+
+$\delta = A t= \frac{1}{2} \dot\delta_0 t= \frac{1}{2}\delta_0 \frac{t}{t_0}$
+
+universo dominado por radiaci처n $\implies t \propto a^2$
 
 si definimos el factor de crecimiento: $D(a) = a^2$
  
-$\implies \delta \propto D(a) \implies \delta = \delta_{in} \frac{D(a)}{D(a_{in})} = \delta_{in} (\frac{a}{a_{in}})^2$ 
-(considerando que $a_{in} \neq 0$)
-
-
-
-modo creciente $\delta = C t$ , $\dot{\delta} = C$
-
-$\delta_{in} = \delta(t_{in}) = C t_{in}$
-
-$\dot{\delta}_{in} = C$
-
-$\delta_{in} = 0 , \dot{\delta}_{in} \neq 0  \implies C \neq 0 \implies t_{in} = 0$
-
-$\delta_{in} \neq 0 , \dot{\delta}_{in} = 0  \implies C = 0 \implies \delta_{in} = 0$ imposible
+$\delta = \frac{1}{2} \delta_{0} \frac{D(a)}{D(a_{0})} $ 
 
 \end{document}
