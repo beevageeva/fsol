@@ -140,7 +140,7 @@ la masa Jeans correspondiente:
 
 $M_J = \frac{4 \pi \lambda_J^3}{3} \rho_b(t=t_0) $ 
 
-(aqui evaluamos $\rho_b$ en $t=t_0$ porque las ecuaciones están en las coordenadas fijas)
+(en la ec de la masa de Jeans de arriba  evaluamos $\rho_b$ en $t=t_0$ porque las ecuaciones están en las coordenadas fijas)
 
 Para calcular $c_s^2 = \frac{dp}{d\rho}$ : de la relación $\rho = \rho_c (\Omega_m (\frac{p}{p_b})^{\frac{3}{4}} + \Omega_r \frac{p}{p_b}  )$
 
@@ -179,7 +179,7 @@ $(1+\delta)(1+a)^4 = 1 \implies $ guardando solo térm. de primer orden:
 
 $1 + \delta + 4a = 1 \implies a = -\frac{\delta}{4}$
 
-Ec Friedmann(sin const. cosmológica):
+Ec Friedmann(sin const. cosmológica)- corresp a la conservación de momento:
 
 $\ddot{R} = -\frac{4 \pi G}{3} (\rho + 3p) R$
 
@@ -206,7 +206,7 @@ $\implies 2  \dot{R}\dot{\delta} + R \ddot{\delta} =  \frac{32 \pi G}{3} R  \rho
 
 $\implies  \ddot{\delta} + 2  \frac{\dot{R}}{R} \dot{\delta} =  \frac{32 \pi G}{3}  \rho_b \delta $
 
-Ec Friedmann(sin curvatura y const. cosmológica):
+Ec Friedmann(sin curvatura y const. cosmológica) - corresp a la conservación de energía:
 
 $(\frac{\dot{R}}{R})^2 = \frac{8 \pi G }{3} \rho_b$
 
@@ -250,8 +250,40 @@ $W_r(k) = \frac{3}{(kr)^3}(sin(kr) - kr cos(kr))$
 
 $\implies <{\delta_r}^2> = \frac{9 }{2\pi^2 r^6}\int_0^\infty{\frac{1}{k^4} P(k)(sin(kr) - k r cos(kr))^2 dk }$
 
-$= \frac{9 \sigma_8^2 19843}{2\pi^2 r^6}\int_0^\infty{k^3(ln(1+11.14k))^2 
+$= \frac{9 \sigma_8^2 19843}{2\pi^2 r^6}\int_0^\infty{\frac{1}{k^5}(ln(1+11.14k))^2 
 (1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
+
+
+para r = 8 (en unidades $h^{-1}Mpc$):
+
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{graf.png}
+ \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(8k) - 8 k  cos(8k))^2$ for $k\le 500$}}
+\end{figure}
+
+Por el caracter oscilatorio de la función  a integrar 
+(ver los gráficos de la funcion en los 2 casos ) en python la estimación para el error absoluto es bastante grande:
+para este caso (r=8)
+el resultado sale 6935998.100369965 y el error estimado es 177016.13453597017 (que representa casi 2\% del resultado)
+
+$\frac{9 \sigma_8^2 19843}{2\pi^2 262144}  6935998.100369965 = (0.83)^2 \implies \sigma_8^2 = 2.87784 \cdot 10^{-6}$
+
+para r = 10 (en unidades $h^{-1}Mpc$):
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{graf2.png}
+ \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(10k) - 10 k  cos(10k))^2$ for $k\le 500$}}
+\end{figure}
+
+el resultado de la integral sale 18504610.63846305 con un error absoluto estimado  13832104.614861604 (casi 74\%)
+
+$<{\delta_r}^2> = \frac{9 \cdot  2.87784 \cdot 10^{-6} \cdot 19843 }{2\pi^2 10^6} 18504610.63846305 = 0.4818$
+
 
 \paragraph{5}
 
