@@ -13,17 +13,19 @@ def funcIntegr2(r):
     #return lambda k: (1.0/3 * (k*r)**3 - 1.0/30 * (k*r)**5 )**2
 
 
-#N = 500
+N = 500
 #
-#func = funcIntegr(10)
+func = funcIntegr(30)
 ##func = funcIntegr2(8)
 ##k = np.arange(1,10000)
-#k = np.arange(0.001,N)
+k = np.arange(0.001,N)
 ##plt.plot(k, func(k), 'o')
-#plt.plot(k, func(k))
-#plt.draw()
-#plt.show()
+plt.plot(k, func(k))
+plt.draw()
+plt.show()
 
+print("PLOTTED FUNC INT TO INF")
+print(integrate.quad(func, 0, np.inf))
 #print(func(0))
 #print(func(1))
 #
