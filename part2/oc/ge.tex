@@ -250,8 +250,10 @@ $W_r(k) = \frac{3}{(kr)^3}(sin(kr) - kr cos(kr))$
 
 $\implies <{\delta_r}^2> = \frac{9 }{2\pi^2 r^6}\int_0^\infty{\frac{1}{k^4} P(k)(sin(kr) - k r cos(kr))^2 dk }$
 
-$= \frac{9 \sigma_8^2 19843}{2\pi^2 r^6}\int_0^\infty{\frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
+$= \frac{9 \sigma_8^2 19843 int(r)}{2\pi^2 r^6}$ donde 
+
+$int(r) = \int_0^\infty{\frac{1}{k^5}(ln(1+11.14k))^2 
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{-\frac{1}{2}}(sin(kr) - k r cos(kr))^2 dk }$
 
 
 para r = 8 (en unidades $h^{-1}Mpc$):
@@ -261,28 +263,20 @@ para r = 8 (en unidades $h^{-1}Mpc$):
  \centering
  \includegraphics[scale=0.5]{graf.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(8k) - 8 k  cos(8k))^2$ for $k\le 500$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(8k) - 8 k  cos(8k))^2$ for $k\le 100/r$}}
 \end{figure}
 
-Por el caracter oscilatorio de la función  a integrar 
-(ver los gráficos de la funcion en los 2 casos ) en python la estimación para el error absoluto es bastante grande:
-para este caso (r=8)
-el resultado sale 6935998.100369965 y el error estimado es 177016.13453597017 (que representa casi 2\% del resultado)
-
-$\frac{9 \sigma_8^2 19843}{2\pi^2 262144}  6935998.100369965 = (0.83)^2 \implies \sigma_8^2 = 2.87784 \cdot 10^{-6}$
+y obtenemos int(8) = 0.06229513 (el error medio estimado es muy pequeño e integrando hasta k = 100/r, 100, 1000 el resultado varía muy poco)
 
 para r = 10 (en unidades $h^{-1}Mpc$):
-
 \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{graf2.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(10k) - 10 k  cos(10k))^2$ for $k\le 500$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(10 k) - 10 k  cos(10k))^2$ for $k\le 100/r$}}
 \end{figure}
 
-el resultado de la integral sale 18504610.63846305 con un error absoluto estimado  13832104.614861604 (casi 74\%)
-
-$<{\delta_r}^2> = \frac{9 \cdot  2.87784 \cdot 10^{-6} \cdot 19843 }{2\pi^2 10^6} 18504610.63846305 = 0.4818$
+int(10) = 0.0782653
 
 para r = 30 (en unidades $h^{-1}Mpc$):
 
@@ -290,14 +284,18 @@ para r = 30 (en unidades $h^{-1}Mpc$):
  \centering
  \includegraphics[scale=0.5]{graf3.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac{1}{2}}(sin(30k) - 10 k  cos(30k))^2$ for $k\le 500$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(30 k) - 30 k  cos(30k))^2$ for $k\le 100/r$}}
 \end{figure}
-
-el resultado de la integral sale 267972584.74904612 y el error medio abs est es 57299383.581828624 = 21\%
-
-$<{\delta_r}^2> = \frac{9 \cdot  2.87784 \cdot 10^{-6} \cdot 19843 }{2\pi^2 10^6} 267972584.74904612 = 6.97713$
+int(30) = 0.8356
 
 
+$\frac{9 \sigma_8^2 19843 int(r)}{2\pi^2 r^6} = <{\delta_r}^2> $
+
+$\frac{9 \sigma_8^2 19843 int(8)}{2\pi^2 8^6} = <{\delta_8}^2> $ (de aqui sale $\sigma_8=17.9$, pero dividiendo las 2 $\implies$)
+
+$ \frac{int(r) 8^6}{int(8) r^6} = \frac{<{\delta_r}^2> }{<{\delta_8}^2> }$ 
+
+$ <{\delta_r}^2> =  \frac{int(r) 8^6 <{\delta_8}^2> }{int(8) r^6} = $ 
 \paragraph{5}
 
 solución general con A, B constantes:
