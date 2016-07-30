@@ -263,7 +263,7 @@ para r = 8 (en unidades $h^{-1}Mpc$):
  \centering
  \includegraphics[scale=0.5]{graf.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(8k) - 8 k  cos(8k))^2$ for $k\le 100/r$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{-\frac{1}{2}}(sin(8k) - 8 k  cos(8k))^2$ for $k\le 100/r$}}
 \end{figure}
 
 y obtenemos int(8) = 0.06229513 (el error medio estimado es muy pequeño e integrando hasta k = 100/r, 100, 1000 el resultado varía muy poco)
@@ -273,7 +273,7 @@ para r = 10 (en unidades $h^{-1}Mpc$):
  \centering
  \includegraphics[scale=0.5]{graf2.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(10 k) - 10 k  cos(10k))^2$ for $k\le 100/r$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{-\frac{1}{2}}(sin(10 k) - 10 k  cos(10k))^2$ for $k\le 100/r$}}
 \end{figure}
 
 int(10) = 0.0782653
@@ -284,7 +284,7 @@ para r = 30 (en unidades $h^{-1}Mpc$):
  \centering
  \includegraphics[scale=0.5]{graf3.png}
  \caption{\emph{$ \frac{1}{k^5}(ln(1+11.14k))^2 
-(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{\frac-{1}{2}}(sin(30 k) - 30 k  cos(30k))^2$ for $k\le 100/r$}}
+(1+18.5k + 5880k^2+17580k^3 + 1.04 \cdot 10^6 k^4)^{-\frac{1}{2}}(sin(30 k) - 30 k  cos(30k))^2$ for $k\le 100/r$}}
 \end{figure}
 int(30) = 0.8356
 
@@ -295,7 +295,12 @@ $\frac{9 \sigma_8^2 19843 int(8)}{2\pi^2 8^6} = <{\delta_8}^2> $ (de aqui sale $
 
 $ \frac{int(r) 8^6}{int(8) r^6} = \frac{<{\delta_r}^2> }{<{\delta_8}^2> }$ 
 
-$ <{\delta_r}^2> =  \frac{int(r) 8^6 <{\delta_8}^2> }{int(8) r^6} = $ 
+$ <{\delta_r}^2> =  \frac{int(r) 8^6 <{\delta_8}^2> }{int(8) r^6} = 2898958.58 \cdot \frac{int(r)}{r^6} $
+
+$ <{\delta_{10}}^2> =   2898958.58 \cdot \frac{0.0782653}{10^6} = 0.227$
+
+$ <{\delta_{30}}^2> =   2898958.58 \cdot \frac{0.8356}{30^6} = 0.0033 $
+ 
 \paragraph{5}
 
 solución general con A, B constantes:
