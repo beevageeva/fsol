@@ -177,6 +177,10 @@ $S^{ion} = n_e <\sigma_{ion} v_e >$
 $S^{rec} = n_e <\sigma_{rec} v_e >$
 
 
+\begin{small}
+\[ x^2 + 2xy + y^2 \]
+\end{small}
+
 expressions for the collision sections in Leake article:
 
 $<\sigma_{ion} v_e > = \frac{1}{\sqrt{T_e^*}}	2.6 \cdot 10^{-19} m^3/s$
@@ -353,6 +357,15 @@ ${F_{B_{x_j}}^{diff}}_{x_i} =  {\nu_{B_{x_j}}^{diff}}_{x_i} \cdot \frac{\partial
 
 \end{frame}
 \begin{frame}{Continuity equations}
+\begin{small}
+ \[ \frac{\partial \rho_{n1}}{\partial t} + \nabla \cdot (\rho_n \vec{v_n} - {\color{blue} F^d_{\rho_n} } )= {\color{red}  S_n }  \]
+
+ \[ \frac{\partial \rho_{c1}}{\partial t} + \nabla \cdot (\rho_c \vec{v_c} - {\color{blue} F^d_{\rho_c}  } )= {\color{red}  -S_n }  \]
+\end{small}
+where
+\[{\color{red} S_n = \rho_c S^{rec} - \rho_n S^{ion} }  \]
+\end{frame}
+\begin{frame}{Continuity equations2}
 $F_{\rho_{\alpha}}^{id} = \rho_\alpha \vec{v_\alpha} $
 
 $S_n' \stackrel{\text{not}}{=} S_{\rho_n}^{coll} = m_H (n_i S^{rec} - n_n S^{ion} ) = \rho_c S^{rec} - \rho_n S^{ion} $
@@ -360,6 +373,34 @@ $S_n' \stackrel{\text{not}}{=} S_{\rho_n}^{coll} = m_H (n_i S^{rec} - n_n S^{ion
 $S_{\rho_c}^{coll} = -S_n'$
 \end{frame}
 \begin{frame}{Momentum equations}
+\begin{multline}
+ \frac{\partial (\rho_{n1} \vec{v_n})  }{\partial t} + \nabla \cdot( 
+\begin{small}
+\begin{bmatrix}
+p_{n1} + \rho_n v_{nx}^2 &  \rho_n v_{nx} v_{ny} &  \rho_n v_{nx} v_{nz}\\ 
+\rho_n v_{nx} v_{ny} &  p_{n1} + \rho_n v_{ny}^2  &  \rho_n v_{ny} v_{nz}\\ 
+\rho_n v_{nx} v_{nz}&   \rho_n v_{nx} v_{nz} &p_{n1} + \rho_n v_{nz}^2   
+\end{bmatrix}
+\end{small}
+ - {\color{blue} \bar{\bar{F}}^d_{\vec{v_n}} } )= \\
+-\rho_n \vec{g} + {\color{red}  \vec{R_n}  }  
+\end{multline}
+\[ \frac{\partial (\rho_{c1} \vec{v_c})  }{\partial t} + \nabla \cdot(\bar{\bar{A}}- {\color{blue} \bar{\bar{F}}^d_{\vec{v_n}} }  )=
+-\rho_c \vec{g} - {\color{red}   \vec{R_n} }  \]
+where
+
+\begin{small}
+$A_{ij} = \rho_n {v_c}_{x_j} {v_c}_{x_j} - \frac{1}{\mu_0}(B_{x_i 0}B_{x_j 1} + B_{x_j0}B_{x_i1}  + B_{x_i1}B_{x_j1}  ) $ 
+
+$A_{ii} = \rho_n {{v_c}_{x_i}}^2 + p_{c1}  - \frac{1}{2 \mu_0}(B_{x_1 1} (B_{x_1 1} + 2  B_{x_1 0} )+ B_{x_2 1} (B_{x_2 1} + 2  B_{x_2 0} ) + B_{x_3 1} (B_{x_3 1} + 2  B_{x_3 0} ))$
+
+\end{small}
+
+${\color{red} \vec{R_n} = \rho_c \vec{v_c} S^{rec} - \rho_n \vec{v_n} S^{ion} +\rho_c \rho_n \alpha^{elastic} (\vec{v_c} - \vec{v_n}) } $
+
+$\alpha^{elastic} \stackrel{\text{not}}{=}  \frac{1}{m_n^2}(\sqrt{\frac{8 k_B T_{nc}}{\pi m_{in}}} m_{in} \Sigma_{in} +  \sqrt{\frac{8 k_B T_{nc}}{\pi m_{en}}} m_{en} \Sigma_{en}) $ 
+\end{frame}
+\begin{frame}{Momentum equations2}
 symmetric flux matrices:
 
 \textbf{neutrals}
@@ -370,9 +411,9 @@ ${F_{\rho_{n}{v_n}_{x_i}}^{id}}_{x_i} = \rho_n {{v_n}_{x_j}}^2 + p_{n1}  $
 
 \textbf{charges}
  
-${F_{\rho_{n}{v_c}_{x_i}}^{id}}_{x_j} = \rho_n {v_c}_{x_j} {v_c}_{x_j} - \frac{1}{\mu_0}(B_{x_i 0}B_{x_j 1} + B_{x_j0}B_{x_i1}  + B_{x_i1}B_{x_j1}  ) $ 
+${F_{\rho_{c}{v_c}_{x_i}}^{id}}_{x_j} = \rho_n {v_c}_{x_j} {v_c}_{x_j} - \frac{1}{\mu_0}(B_{x_i 0}B_{x_j 1} + B_{x_j0}B_{x_i1}  + B_{x_i1}B_{x_j1}  ) $ 
 
-${F_{\rho_{n}{v_c}_{x_i}}^{id}}_{x_i} = \rho_n {{v_c}_{x_j}}^2 + p_{c1}  - \frac{1}{2 \mu_0}(B_{x_1 1} (B_{x_1 1} + 2  B_{x_1 0} )+ B_{x_2 1} (B_{x_2 1} + 2  B_{x_2 0} ) + B_{x_3 1} (B_{x_3 1} + 2  B_{x_3 0} ))$
+${F_{\rho_{c}{v_c}_{x_i}}^{id}}_{x_i} = \rho_n {{v_c}_{x_i}}^2 + p_{c1}  - \frac{1}{2 \mu_0}(B_{x_1 1} (B_{x_1 1} + 2  B_{x_1 0} )+ B_{x_2 1} (B_{x_2 1} + 2  B_{x_2 0} ) + B_{x_3 1} (B_{x_3 1} + 2  B_{x_3 0} ))$
 
 with gravity: $S_{\rho_\alpha \vec{v_\alpha}}^{id} = -\rho_\alpha \vec{g}$
 
