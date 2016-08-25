@@ -358,9 +358,9 @@ ${F_{B_{x_j}}^{diff}}_{x_i} =  {\nu_{B_{x_j}}^{diff}}_{x_i} \cdot \frac{\partial
 \end{frame}
 \begin{frame}{Continuity equations}
 \begin{small}
- \[ \frac{\partial \rho_{n1}}{\partial t} + \nabla \cdot (\rho_n \vec{v_n} - {\color{blue} F^d_{\rho_n} } )= {\color{red}  S_n }  \]
+ \[ \frac{\partial \rho_{n1}}{\partial t} + \nabla \cdot (\rho_n \vec{v_n} - {\color{blue} \vec{F}^d_{\rho_n} } )= {\color{red}  S_n }  \]
 
- \[ \frac{\partial \rho_{c1}}{\partial t} + \nabla \cdot (\rho_c \vec{v_c} - {\color{blue} F^d_{\rho_c}  } )= {\color{red}  -S_n }  \]
+ \[ \frac{\partial \rho_{c1}}{\partial t} + \nabla \cdot (\rho_c \vec{v_c} - {\color{blue} \vec{F}^d_{\rho_c}  } )= {\color{red}  -S_n }  \]
 \end{small}
 where
 \[{\color{red} S_n = \rho_c S^{rec} - \rho_n S^{ion} }  \]
@@ -373,7 +373,7 @@ $S_n' \stackrel{\text{not}}{=} S_{\rho_n}^{coll} = m_H (n_i S^{rec} - n_n S^{ion
 $S_{\rho_c}^{coll} = -S_n'$
 \end{frame}
 \begin{frame}{Momentum equations}
-\begin{multline}
+\begin{multline*}
  \frac{\partial (\rho_{n1} \vec{v_n})  }{\partial t} + \nabla \cdot( 
 \begin{small}
 \begin{bmatrix}
@@ -384,8 +384,8 @@ p_{n1} + \rho_n v_{nx}^2 &  \rho_n v_{nx} v_{ny} &  \rho_n v_{nx} v_{nz}\\
 \end{small}
  - {\color{blue} \bar{\bar{F}}^d_{\vec{v_n}} } )= \\
 -\rho_n \vec{g} + {\color{red}  \vec{R_n}  }  
-\end{multline}
-\[ \frac{\partial (\rho_{c1} \vec{v_c})  }{\partial t} + \nabla \cdot(\bar{\bar{A}}- {\color{blue} \bar{\bar{F}}^d_{\vec{v_n}} }  )=
+\end{multline*}
+\[ \frac{\partial (\rho_{c1} \vec{v_c})  }{\partial t} + \nabla \cdot(\bar{\bar{A}}- {\color{blue} \bar{\bar{F}}^d_{\vec{v_c}} }  )=
 -\rho_c \vec{g} - {\color{red}   \vec{R_n} }  \]
 where
 
